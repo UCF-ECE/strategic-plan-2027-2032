@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ECE Strategic Plan 2027–2032</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#FFC904;--black:#000;--white:#fff;
+  --gray-50:#f8f9fa;--gray-100:#e9ecef;--gray-200:#dee2e6;
+  --gray-400:#adb5bd;--gray-600:#6c757d;--gray-800:#343a40;--gray-900:#212529;
+  --p1:#2563eb;--p1-bg:#eff6ff;--p1-border:#bfdbfe;
+  --p2:#7c3aed;--p2-bg:#f5f3ff;--p2-border:#ddd6fe;
+  --p3:#059669;--p3-bg:#ecfdf5;--p3-border:#a7f3d0;
+  --p4:#dc2626;--p4-bg:#fef2f2;--p4-border:#fecaca;
+  --font-display:'DM Serif Display',Georgia,serif;
+  --font-body:'DM Sans',system-ui,sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+  --slide-max:1100px;
+}
+html{font-size:16px;-webkit-font-smoothing:antialiased}
+body{font-family:var(--font-body);background:var(--gray-900);color:var(--gray-900);overflow:hidden;height:100vh;width:100vw}
+.deck{position:relative;width:100%;height:100vh;overflow:hidden}
+.slide{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  padding:1rem 3rem 3.5rem;
+  opacity:0;pointer-events:none;
+  transition:opacity .45s ease,transform .45s ease;
+  transform:translateX(40px);background:var(--white);
+}
+.slide.active{opacity:1;pointer-events:auto;transform:translateX(0)}
+.slide.exiting{opacity:0;transform:translateX(-40px)}
+.slide-inner{width:100%;max-width:var(--slide-max);display:flex;flex-direction:column;gap:1.1rem}
+
+/* ── Slide action links ── */
+.slide-actions{
+  display:flex;gap:1rem;align-items:center;flex-wrap:wrap;
+  margin-top:auto;padding-top:.6rem;
+  border-top:1px solid var(--gray-100);
+  font-family:var(--font-mono);font-size:.68rem;
+}
+.slide-actions a{
+  color:var(--gray-600);text-decoration:none;
+  display:flex;align-items:center;gap:.3rem;
+  padding:.25rem .55rem;border-radius:4px;
+  border:1px solid var(--gray-200);transition:all .2s;
+}
+.slide-actions a:hover{color:var(--p1);border-color:var(--p1);background:var(--p1-bg)}
+.slide-actions a.feedback{border-color:var(--gold)}
+.slide-actions a.feedback:hover{color:var(--gray-900);border-color:var(--gold);background:rgba(255,201,4,.15)}
+.title-slide .slide-actions,.end-slide .slide-actions{border-top-color:var(--gray-800)}
+.title-slide .slide-actions a,.end-slide .slide-actions a{color:var(--gray-400);border-color:var(--gray-600)}
+.title-slide .slide-actions a:hover,.end-slide .slide-actions a:hover{color:var(--gold);border-color:var(--gold);background:rgba(255,201,4,.08)}
+
+/* ── Progress bar ── */
+.progress-wrap{position:fixed;top:0;left:0;right:0;z-index:100;height:4px;background:var(--gray-200)}
+.progress-bar{height:100%;background:var(--gold);transition:width .4s ease}
+
+/* ── Nav bar ── */
+.nav-bar{
+  position:fixed;bottom:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:.55rem 2rem;background:var(--gray-900);color:var(--gray-400);
+  font-size:.78rem;font-family:var(--font-mono);
+}
+.nav-bar button{
+  background:none;border:1px solid var(--gray-600);
+  color:var(--white);padding:.35rem 1rem;border-radius:4px;
+  font-family:var(--font-body);font-size:.8rem;cursor:pointer;transition:all .2s;
+}
+.nav-bar button:hover:not(:disabled){background:var(--gold);color:var(--black);border-color:var(--gold)}
+.nav-bar button:disabled{opacity:.25;cursor:default}
+.nav-center{display:flex;align-items:center;gap:.7rem}
+.slide-dots{display:flex;gap:4px}
+.slide-dots span{width:7px;height:7px;border-radius:50%;background:var(--gray-600);transition:all .3s;cursor:pointer}
+.slide-dots span.active{background:var(--gold);transform:scale(1.3)}
+.slide-dots span:hover{background:var(--gray-400)}
+
+/* ── Typography ── */
+.kicker{font-family:var(--font-mono);font-size:.7rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase}
+.slide-title{font-family:var(--font-display);font-size:clamp(1.6rem,3.5vw,2.4rem);line-height:1.15;color:var(--gray-900)}
+.slide-subtitle{font-size:1rem;color:var(--gray-600);line-height:1.6;max-width:780px}
+.big-number{font-family:var(--font-display);font-size:clamp(2rem,4.5vw,3.2rem);line-height:1}
+
+/* ── Cards / Grid ── */
+.card-grid{display:grid;gap:.75rem}
+.card-grid.cols-2{grid-template-columns:1fr 1fr}
+.card-grid.cols-3{grid-template-columns:1fr 1fr 1fr}
+.card-grid.cols-4{grid-template-columns:1fr 1fr 1fr 1fr}
+@media(max-width:800px){.card-grid.cols-2,.card-grid.cols-3,.card-grid.cols-4{grid-template-columns:1fr}.slide{padding:1rem 1.25rem 3.5rem}}
+.card{padding:1rem 1.15rem;border-radius:10px;border:1px solid var(--gray-200);transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.06)}
+.card h3{font-size:.9rem;font-weight:600;margin-bottom:.3rem}
+.card p,.card li{font-size:.8rem;color:var(--gray-600);line-height:1.45}
+.card ul{list-style:none;padding:0}
+.card li::before{content:"→ ";color:var(--gray-400);font-weight:600}
+.p1{border-left:4px solid var(--p1);background:var(--p1-bg)}
+.p2{border-left:4px solid var(--p2);background:var(--p2-bg)}
+.p3{border-left:4px solid var(--p3);background:var(--p3-bg)}
+.p4{border-left:4px solid var(--p4);background:var(--p4-bg)}
+.p1 h3{color:var(--p1)}.p2 h3{color:var(--p2)}.p3 h3{color:var(--p3)}.p4 h3{color:var(--p4)}
+
+/* ── Stat row ── */
+.stat-row{display:flex;gap:1.5rem;flex-wrap:wrap}
+.stat{text-align:center;flex:1;min-width:100px}
+.stat .big-number{color:var(--gold)}
+.stat .label{font-size:.75rem;color:var(--gray-600);margin-top:.15rem}
+
+/* ── Timeline ── */
+.timeline{display:flex;gap:0;position:relative}
+.timeline::before{content:'';position:absolute;top:13px;left:0;right:0;height:3px;background:var(--gray-200)}
+.tl-step{flex:1;position:relative;text-align:center;padding-top:1.75rem}
+.tl-step::before{content:'';position:absolute;top:6px;left:50%;width:14px;height:14px;border-radius:50%;background:var(--gold);transform:translateX(-50%);border:3px solid var(--white);box-shadow:0 0 0 2px var(--gold)}
+.tl-step .yr{font-family:var(--font-mono);font-size:.7rem;font-weight:600;color:var(--gray-900)}
+.tl-step .desc{font-size:.7rem;color:var(--gray-600);margin-top:.1rem;line-height:1.3;padding:0 .15rem}
+
+/* ── Goal list ── */
+.goal-list{display:flex;flex-direction:column;gap:.45rem}
+.goal-item{display:flex;align-items:flex-start;gap:.65rem;padding:.6rem .85rem;border-radius:8px;background:var(--gray-50);border:1px solid var(--gray-100)}
+.goal-tag{font-family:var(--font-mono);font-size:.6rem;font-weight:600;padding:.18rem .4rem;border-radius:4px;white-space:nowrap;margin-top:2px}
+.goal-tag.g1{background:var(--p1-bg);color:var(--p1);border:1px solid var(--p1-border)}
+.goal-tag.g2{background:var(--p2-bg);color:var(--p2);border:1px solid var(--p2-border)}
+.goal-tag.g3{background:var(--p3-bg);color:var(--p3);border:1px solid var(--p3-border)}
+.goal-text{font-size:.8rem;color:var(--gray-800);line-height:1.4}
+.goal-text strong{font-weight:600}
+
+/* ── Title slide ── */
+.title-slide{background:var(--gray-900);color:var(--white);text-align:center}
+.title-slide .slide-title{color:var(--white);font-size:clamp(1.9rem,4.5vw,3rem)}
+.title-slide .slide-subtitle{color:var(--gray-400);margin:0 auto}
+.gold-rule{width:80px;height:4px;background:var(--gold);border-radius:2px;margin:0 auto}
+.title-meta{font-family:var(--font-mono);font-size:.7rem;color:var(--gray-400);letter-spacing:.05em}
+.ucf-badge{display:inline-block;font-family:var(--font-mono);font-size:.66rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:.28rem .85rem;border:1px solid var(--gold);border-radius:3px;color:var(--gold)}
+
+/* ── Section divider ── */
+.section-slide{text-align:center}
+.section-slide .slide-inner{align-items:center}
+.section-icon{width:50px;height:50px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.35rem;margin-bottom:.3rem}
+.section-slide .slide-subtitle{text-align:center}
+
+/* ── End slide ── */
+.end-slide{background:var(--gray-900);color:var(--white);text-align:center}
+.end-slide .slide-inner{align-items:center}
+.end-slide .slide-title{color:var(--white)}
+.end-slide .slide-subtitle{color:var(--gray-400);margin:0 auto}
+.committee-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem .65rem;font-family:var(--font-mono);font-size:.68rem;color:var(--gray-400)}
+.committee-grid .chair{color:var(--gold);font-weight:600}
+
+/* ── Keyboard hint ── */
+.kb-hint{position:fixed;bottom:3rem;right:2rem;z-index:99;font-size:.66rem;color:var(--gray-600);font-family:var(--font-mono);opacity:.5}
+.kb-hint kbd{display:inline-block;padding:1px 5px;border-radius:3px;border:1px solid var(--gray-600);font-size:.6rem}
+
+/* ── Toast notification ── */
+.toast{
+  position:fixed;bottom:4.5rem;left:50%;transform:translateX(-50%) translateY(10px);
+  background:var(--gray-900);color:var(--white);
+  font-family:var(--font-mono);font-size:.75rem;
+  padding:.55rem 1.2rem;border-radius:6px;
+  box-shadow:0 4px 20px rgba(0,0,0,.25);
+  opacity:0;transition:all .3s ease;z-index:200;pointer-events:none;
+  border:1px solid var(--gold);
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* Animations */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.slide.active .anim{animation:fadeInUp .4s ease both}
+.slide.active .anim:nth-child(1){animation-delay:.04s}
+.slide.active .anim:nth-child(2){animation-delay:.1s}
+.slide.active .anim:nth-child(3){animation-delay:.17s}
+.slide.active .anim:nth-child(4){animation-delay:.24s}
+.slide.active .anim:nth-child(5){animation-delay:.31s}
+.slide.active .anim:nth-child(6){animation-delay:.38s}
+.slide.active .anim:nth-child(7){animation-delay:.45s}
+.slide.active .anim:nth-child(8){animation-delay:.52s}
+</style>
+</head>
+<body>
+<div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
+<div class="deck" id="deck">
+
+<!-- SLIDE 0: TITLE -->
+<div class="slide title-slide active" data-slide="0">
+<div class="slide-inner" style="align-items:center;gap:1.3rem">
+  <div class="ucf-badge anim">UCF · College of Engineering &amp; Computer Science</div>
+  <div class="slide-title anim">ECE Strategic Plan<br>2027 – 2032</div>
+  <div class="gold-rule anim"></div>
+  <div class="slide-subtitle anim">Department of Electrical and Computer Engineering</div>
+  <div class="title-meta anim">DRAFT v0.9 · March 2026</div>
+  <div class="slide-actions anim">
+    <a href="plan.html" target="_top" rel="noopener">📄 View Full Plan Online</a>
+    <a href="https://ucf.qualtrics.com/jfe/form/SV_6eTZQHve6BlxPzE?section=overall" target="_top" rel="noopener" class="feedback">💬 Provide Feedback (Survey)</a>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 1: OVERVIEW -->
+<div class="slide" data-slide="1">
+<div class="slide-inner">
+  <div class="kicker anim" style="color:var(--gold)">Department Overview</div>
+  <div class="slide-title anim">One of the Largest ECE<br>Departments in the Nation</div>
+  <div class="stat-row anim">
+    <div class="stat"><div class="big-number">~2,000</div><div class="label">Undergraduates</div></div>
+    <div class="stat"><div class="big-number">~350</div><div class="label">Graduate Students</div></div>
+    <div class="stat"><div class="big-number">47</div><div class="label">T/TE Faculty</div></div>
+    <div class="stat"><div class="big-number">#50/#53</div><div class="label">USNWR CpE / EE</div></div>
+  </div>
+  <div class="card-grid cols-3 anim">
+    <div class="card"><h3>Programs</h3><p>BS in EE &amp; CpE · MS in EE, CpE, &amp; Robotics · PhD in EE &amp; CpE · 4 Graduate Certificates · Accelerated BS→MS</p></div>
+    <div class="card"><h3>Research Strengths</h3><p>Hardware security · VLSI/IC design · Power &amp; energy · Communications · Computer architecture · RF/microwave · AI/ML · Robotics</p></div>
+    <div class="card"><h3>Partnerships &amp; Distinction</h3><p>L3Harris · Lockheed Martin · INL · Sandia · AMD · Intel · 1 NAE · 15 IEEE Fellows · 8 early-career awardees</p></div>
+  </div>
+  <div class="slide-actions anim">
+    <a href="plan.html" target="_top" rel="noopener">📄 §1 Department Overview</a>
+    <a href="https://ucf.qualtrics.com/jfe/form/SV_6eTZQHve6BlxPzE?section=overall" target="_top" rel="noopener" class="feedback">💬 Feedback: Overall Plan</a>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 2: MISSION & VISION -->
+<div class="slide" data-slide="2">
+<div class="slide-inner">
+  <div class="kicker anim" style="color:var(--gold)">Mission &amp; Vision</div>
+  <div class="slide-title anim">Where We're Headed</div>
+  <div class="card anim" style="background:var(--gray-50);border:2px solid var(--gold)">
+    <h3 style="color:var(--gold);font-size:.7rem;font-family:var(--font-mono);letter-spacing:.1em;text-transform:uppercase">Vision</h3>
+    <p style="font-size:.92rem;color:var(--gray-800);line-height:1.55;margin-top:.25rem">To be a <strong>nationally recognized</strong> department that produces technically excellent, professionally adaptable engineers while advancing knowledge across the full spectrum of ECE — celebrated for the <strong>quality of its graduates</strong>, the <strong>impact of its research</strong>, and the <strong>innovative programs</strong> that distinguish it from peer institutions.</p>
+  </div>
+  <div class="card anim">
+    <h3 style="font-size:.7rem;font-family:var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--gray-600)">Mission — Five Commitments</h3>
+    <ul style="margin-top:.35rem;display:flex;flex-direction:column;gap:.3rem">
+      <li>Deliver a rigorous, industry-aligned curriculum that evolves with technology</li>
+      <li>Prepare graduates through experiential learning, online education, &amp; high-impact practices</li>
+      <li>Conduct research that generates knowledge, IP, and commercial value</li>
+      <li>Cultivate a culture recognizing excellence in teaching, research, service, &amp; entrepreneurship</li>
+      <li>Sustain partnerships with industry, alumni, defense agencies, &amp; national labs</li>
+    </ul>
+  </div>
+  <div class="slide-actions anim">
+    <a href="plan.html" target="_top" rel="noopener">📄 §2 Mission &amp; Vision</a>
+    <a href="https://ucf.qualtrics.com/jfe/form/SV_6eTZQHve6BlxPzE?section=overall" target="_top" rel="noopener" class="feedback">💬 Feedback: Mission &amp; Vision</a>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 3: FOUR PRIORITIES -->
+<div class="slide" data-slide="3">
+<div class="slide-inner">
+  <div class="kicker anim" style="color:var(--gold)">Strategic Framework</div>
+  <div class="slide-title anim">Four Priorities, Aligned to UCF</div>
+  <div class="slide-subtitle anim">Every strategy maps to UCF's "Unleashing Potential" metrics and focus areas.</div>
+  <div class="card-grid cols-2 anim">
+    <div class="card p1"><h3>P1 — Student Success &amp; Well-Being</h3><p>Flexible learning environments · AI-ready curriculum · Industry-aligned programs · High-impact practices</p></div>
+    <div class="card p2"><h3>P2 — Discovery &amp; Exploration</h3><p>Lab modernization · Research-to-commercialization · PhD growth · Center-level grants</p></div>
+    <div class="card p3"><h3>P3 — Community &amp; Culture</h3><p>Awards &amp; recognition · Alumni engagement · Faculty satisfaction · Graduate community</p></div>
+    <div class="card p4"><h3>P4 — Innovation &amp; Sustainability</h3><p>National rankings · Performance-funding alignment · Signature programs · Revenue growth</p></div>
+  </div>
+  <div class="slide-actions anim">
+    <a href="plan.html" target="_top" rel="noopener">📄 §3 Key Strategic Activities</a>
+    <a href="https://ucf.qualtrics.com/jfe/form/SV_6eTZQHve6BlxPzE?section=overall" target="_top" rel="noopener" class="feedback">💬 Feedback: Overall Plan</a>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 4: P1 SECTION -->
+<div class="slide section-slide" data-slide="4">
+<div class="slide-inner">
+  <div class="section-icon anim" style="background:var(--p1-bg);color:var(--p1);border:2px solid var(--p1-border)">🎓</div>
+  <div class="kicker anim" style="color:var(--p1)">Priority 1</div>
+  <div class="slide-title anim">Student Success<br>&amp; Well-Being</div>
+  <div class="slide-subtitle anim">Build scalable learning, prepare for the technology curve, and close the industry–curriculum gap.</div>
+  <div class="slide-actions anim">
+    <a href="plan.html" target="_top" rel="noopener">📄 Priority 1 in Full Plan</a>
+    <a href="https://ucf.qualtrics.com/jfe/form/SV_6eTZQHve6BlxPzE?section=p1" target="_top" rel="noopener" class="feedback">💬 Feedback: Priority 1</a>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 5: P1 GOALS -->
+<div class="slide" data-slide="5">
+<div class="slide-inner">
+  <div class="kicker anim" style="color:var(--p1)">Priority 1 · Goals</div>
+  <div class="slide-title anim" style="font-size:clamp(1.2rem,2.6vw,1.8rem)">Three Goals for Student Success</div>
+  <div class="goal-list anim">
+    <div class="goal-item"><span class="goal-tag g1">G1</span><div class="goal-text"><strong>Flexible Learning Environments</strong> — Expand online/mixed-mode (Robotics MS, NASA Parts Certificate), build remote-access lab infrastructure (digital twins, AR/VR), train faculty via CDL/CCIE certification.</div></div>
+    <div class="goal-item"><span class="goal-tag g1">G2</span><div class="goal-text"><strong>Exponential Technology Curve</strong> — AI across the "ECE 2030 curriculum" via closed-loop (Implement → Assess → Revise), faculty incentives, ULA support, progressive critical-thinking assignments.</div></div>
+    <div class="goal-item"><span class="goal-tag g1">G3</span><div class="goal-text"><strong>Industry–Curriculum Gap</strong> — IAB annual reviews, new certificates (Semiconductor Mfg, Hardware Security, AI-for-EE), HIPs to 75%+, grow student professional chapters.</div></div>
+  </div>
+  <div class="timeline anim">
+    <div class="tl-step"><div class="yr">Year 1</div><div class="desc">Pilots launched · Faculty certified · IAB gap survey · Chapters reactivated</div></div>
+    <div class="tl-step"><div class="yr">Year 3</div><div class="desc">1 online MS · 30%+ AI courses · +15pp HIP · 5+ chapters</div></div>
+    <div class="tl-step"><div class="yr">Year 5</div><div class="desc">≥2 online programs · 60%+ AI pedagogy · 75%+ HIP</div></div>
+  </div>
+  <div class="slide-actions anim">
+    <a href="plan.html" target="_top" rel="noopener">📄 P1 Strategies &amp; Outcomes</a>
+    <a href="https://ucf.qualtrics.com/jfe/form/SV_6eTZQHve6BlxPzE?section=p1" target="_top" rel="noopener" class="feedback">💬 Feedback: Priority 1</a>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 6: P2 SECTION -->
+<div class="slide section-slide" data-slide="6">
+<div class="slide-inner">
+  <div class="section-icon anim" style="background:var(--p2-bg);color:var(--p2);border:2px solid var(--p2-border)">🔬</div>
+  <div class="kicker anim" style="color:var(--p2)">Priority 2</div>
+  <div class="slide-title anim">Discovery<br>&amp; Exploration</div>
+  <div class="slide-subtitle anim">Modernize labs, build a commercialization pipeline, and grow the PhD research workforce.</div>
+  <div class="slide-actions anim">
+    <a href="plan.html" target="_top" rel="noopener">📄 Priority 2 in Full Plan</a>
+    <a href="https://ucf.qualtrics.com/jfe/form/SV_6eTZQHve6BlxPzE?section=p2" target="_top" rel="noopener" class="feedback">💬 Feedback: Priority 2</a>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 7: P2 GOALS -->
+<div class="slide" data-slide="7">
+<div class="slide-inner">
+  <div class="kicker anim" style="color:var(--p2)">Priority 2 · Goals</div>
+  <div class="slide-title anim" style="font-size:clamp(1.2rem,2.6vw,1.8rem)">Three Goals for Discovery</div>
+  <div class="goal-list anim">
+    <div class="goal-item"><span class="goal-tag g2">G1</span><div class="goal-text"><strong>Grow &amp; Revamp Labs</strong> — Comprehensive audit, phased modernization ($250K–$1M), new labs in AI/ML hardware, semiconductor, power electronics, robotics. Update senior design with modern EDA, FPGA, embedded ML.</div></div>
+    <div class="goal-item"><span class="goal-tag g2">G2</span><div class="goal-text"><strong>Research-to-Commercialization</strong> — ECE Entrepreneurship Laureate (modeled on FFL), per-faculty R&amp;D +30%, patents +50%, target ≥1 startup/license over 5 years.</div></div>
+    <div class="goal-item"><span class="goal-tag g2">G3</span><div class="goal-text"><strong>PhD Enrollment &amp; Workforce</strong> — Increase funded RA/TA lines, PhD-to-faculty ratio to ≥5:1, international recruiting, postdoc pipeline.</div></div>
+  </div>
+  <div class="timeline anim">
+    <div class="tl-step"><div class="yr">Year 1</div><div class="desc">Lab audit · Entrepreneurship cohort · Baseline expenditures</div></div>
+    <div class="tl-step"><div class="yr">Year 3</div><div class="desc">$250K–$500K upgrades · R&amp;D +15% · Ratio ≥4:1</div></div>
+    <div class="tl-step"><div class="yr">Year 5</div><div class="desc">5-yr refresh cycle · ≥1 startup · R&amp;D +30% · ≥5:1</div></div>
+  </div>
+  <div class="slide-actions anim">
+    <a href="plan.html" target="_top" rel="noopener">📄 P2 Strategies &amp; Outcomes</a>
+    <a href="https://ucf.qualtrics.com/jfe/form/SV_6eTZQHve6BlxPzE?section=p2" target="_top" rel="noopener" class="feedback">💬 Feedback: Priority 2</a>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 8: P3 SECTION -->
+<div class="slide section-slide" data-slide="8">
+<div class="slide-inner">
+  <div class="section-icon anim" style="background:var(--p3-bg);color:var(--p3);border:2px solid var(--p3-border)">🤝</div>
+  <div class="kicker anim" style="color:var(--p3)">Priority 3</div>
+  <div class="slide-title anim">Community<br>&amp; Culture</div>
+  <div class="slide-subtitle anim">Recognize excellence, engage alumni and community, and foster a supportive department culture.</div>
+  <div class="slide-actions anim">
+    <a href="plan.html" target="_top" rel="noopener">📄 Priority 3 in Full Plan</a>
+    <a href="https://ucf.qualtrics.com/jfe/form/SV_6eTZQHve6BlxPzE?section=p3" target="_top" rel="noopener" class="feedback">💬 Feedback: Priority 3</a>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 9: P3 GOALS -->
+<div class="slide" data-slide="9">
+<div class="slide-inner">
+  <div class="kicker anim" style="color:var(--p3)">Priority 3 · Goals</div>
+  <div class="slide-title anim" style="font-size:clamp(1.2rem,2.6vw,1.8rem)">Three Goals for Community</div>
+  <div class="goal-list anim">
+    <div class="goal-item"><span class="goal-tag g3">G1</span><div class="goal-text"><strong>Celebrate Excellence</strong> — Formal ECE awards for faculty and students, annual community event (200+ attendees, corporate sponsorship), pipeline to CECS/UCF honors.</div></div>
+    <div class="goal-item"><span class="goal-tag g3">G2</span><div class="goal-text"><strong>Deepen Engagement</strong> — Alumni network to 500+ with 25+ mentors, ECE offerings for Pegasus Partnerships, community outreach via LIFE@UCF, media, public programming.</div></div>
+    <div class="goal-item"><span class="goal-tag g3">G3</span><div class="goal-text"><strong>Inclusive Department Culture</strong> — Satisfaction above CECS median, structured pre-tenure mentoring, formalize equipment sharing, graduate Open Forums, PhD lunch series, faculty liaisons.</div></div>
+  </div>
+  <div class="timeline anim">
+    <div class="tl-step"><div class="yr">Year 1</div><div class="desc">Inaugural awards · Baseline survey · Mentors assigned · First Open Forum</div></div>
+    <div class="tl-step"><div class="yr">Year 3</div><div class="desc">200+ at event · 200+ alumni · Satisfaction +10%</div></div>
+    <div class="tl-step"><div class="yr">Year 5</div><div class="desc">Signature event · 500+ alumni · Above-median satisfaction</div></div>
+  </div>
+  <div class="slide-actions anim">
+    <a href="plan.html" target="_top" rel="noopener">📄 P3 Strategies &amp; Outcomes</a>
+    <a href="https://ucf.qualtrics.com/jfe/form/SV_6eTZQHve6BlxPzE?section=p3" target="_top" rel="noopener" class="feedback">💬 Feedback: Priority 3</a>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 10: P4 SECTION -->
+<div class="slide section-slide" data-slide="10">
+<div class="slide-inner">
+  <div class="section-icon anim" style="background:var(--p4-bg);color:var(--p4);border:2px solid var(--p4-border)">🚀</div>
+  <div class="kicker anim" style="color:var(--p4)">Priority 4</div>
+  <div class="slide-title anim">Innovation<br>&amp; Sustainability</div>
+  <div class="slide-subtitle anim">Climb the rankings, align with performance funding, and build signature programs that differentiate ECE.</div>
+  <div class="slide-actions anim">
+    <a href="plan.html" target="_top" rel="noopener">📄 Priority 4 in Full Plan</a>
+    <a href="https://ucf.qualtrics.com/jfe/form/SV_6eTZQHve6BlxPzE?section=p4" target="_top" rel="noopener" class="feedback">💬 Feedback: Priority 4</a>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 11: P4 GOALS -->
+<div class="slide" data-slide="11">
+<div class="slide-inner">
+  <div class="kicker anim" style="color:var(--p4)">Priority 4 · Goals</div>
+  <div class="slide-title anim" style="font-size:clamp(1.2rem,2.6vw,1.8rem)">Three Goals for Innovation</div>
+  <div class="goal-list anim">
+    <div class="goal-item"><span class="goal-tag g1">G1</span><div class="goal-text"><strong>National Ranking &amp; Performance Funding</strong> — Top-tier publications +40%, map ECE metrics to state performance-funding indicators, USNWR improvement toward top 50.</div></div>
+    <div class="goal-item"><span class="goal-tag g2">G2</span><div class="goal-text"><strong>Programs for Growth</strong> — Professional/corporate education partnerships, giving opportunities via UCF Advancement (named scholarships, lab sponsorships), ECE as net revenue contributor.</div></div>
+    <div class="goal-item"><span class="goal-tag g3">G3</span><div class="goal-text"><strong>Signature Programs</strong> — Future Faculty Laureate (FFL, Dean-endorsed for CECS replication, 50%+ into academic roles) and ECE Graduate Seminar series.</div></div>
+  </div>
+  <div class="timeline anim">
+    <div class="tl-step"><div class="yr">Year 1</div><div class="desc">Writing groups · Metrics mapped · Corporate partner · FFL cohort · Seminar launched</div></div>
+    <div class="tl-step"><div class="yr">Year 3</div><div class="desc">Publications +20% · Revenue tracked · FFL alumni tracked</div></div>
+    <div class="tl-step"><div class="yr">Year 5</div><div class="desc">+40% pubs · ≥2 corporate partners · FFL replicated across CECS</div></div>
+  </div>
+  <div class="slide-actions anim">
+    <a href="plan.html" target="_top" rel="noopener">📄 P4 Strategies &amp; Outcomes</a>
+    <a href="https://ucf.qualtrics.com/jfe/form/SV_6eTZQHve6BlxPzE?section=p4" target="_top" rel="noopener" class="feedback">💬 Feedback: Priority 4</a>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 12: RESOURCES -->
+<div class="slide" data-slide="12">
+<div class="slide-inner">
+  <div class="kicker anim" style="color:var(--gold)">Resources</div>
+  <div class="slide-title anim" style="font-size:clamp(1.2rem,2.6vw,1.8rem)">What We Have &amp; What We Need</div>
+  <div class="card-grid cols-2 anim">
+    <div class="card" style="background:var(--gray-50)">
+      <h3 style="color:var(--p3)">Existing Strengths</h3>
+      <ul><li>Strong EE/CpE enrollment &amp; tuition base</li><li>Nationally competitive research faculty</li><li>Defense/aerospace corridor proximity</li><li>Online infrastructure &amp; revenue-sharing model</li><li>CHIPS Act / semiconductor alignment</li><li>Dean-endorsed FFL program</li><li>AI-for-ECE committee with chair support</li></ul>
+    </div>
+    <div class="card" style="background:var(--gray-50)">
+      <h3 style="color:var(--p4)">Additional Resources Needed</h3>
+      <ul><li>≥1 dedicated AI/IT support staff</li><li>≥20 ULA positions for AI integration</li><li>3–5 new tenure-track lines over 5 years</li><li>Lab modernization: $500K–$1M / 5 years</li><li>Remote-lab &amp; digital-twin infrastructure</li><li>Increased GTA/GRA lines for PhD growth</li><li>Chapter &amp; Entrepreneurship Laureate funding</li></ul>
+    </div>
+  </div>
+  <div class="slide-actions anim">
+    <a href="plan.html" target="_top" rel="noopener">📄 §4–5 Resources &amp; Acquisition</a>
+    <a href="https://ucf.qualtrics.com/jfe/form/SV_6eTZQHve6BlxPzE?section=resources" target="_top" rel="noopener" class="feedback">💬 Feedback: Resources</a>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 13: ACQUISITION -->
+<div class="slide" data-slide="13">
+<div class="slide-inner">
+  <div class="kicker anim" style="color:var(--gold)">Resource Acquisition</div>
+  <div class="slide-title anim" style="font-size:clamp(1.2rem,2.6vw,1.8rem)">How We Get There</div>
+  <div class="slide-subtitle anim">ECE develops compelling programs, builds data-driven cases, and packages opportunities for investment.</div>
+  <div class="card-grid cols-4 anim">
+    <div class="card" style="text-align:center"><div style="font-size:1.5rem;margin-bottom:.35rem">📋</div><h3>External Grants</h3><p>NSF MRI/CCRI · DoD DURIP · DOE · UCF internal</p></div>
+    <div class="card" style="text-align:center"><div style="font-size:1.5rem;margin-bottom:.35rem">🏭</div><h3>Industry Partners</h3><p>Lab sponsorships · Equipment · Capstone funding · Pegasus</p></div>
+    <div class="card" style="text-align:center"><div style="font-size:1.5rem;margin-bottom:.35rem">🏛️</div><h3>CECS &amp; UCF</h3><p>Data-driven cases for lines, space, staff &amp; ULAs</p></div>
+    <div class="card" style="text-align:center"><div style="font-size:1.5rem;margin-bottom:.35rem">🎁</div><h3>Philanthropy</h3><p>Named scholarships · Lab naming · Equipment via Advancement</p></div>
+  </div>
+  <div class="slide-actions anim">
+    <a href="plan.html" target="_top" rel="noopener">📄 §5 Resource Acquisition</a>
+    <a href="https://ucf.qualtrics.com/jfe/form/SV_6eTZQHve6BlxPzE?section=resources" target="_top" rel="noopener" class="feedback">💬 Feedback: Resources</a>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 14: END -->
+<div class="slide end-slide" data-slide="14">
+<div class="slide-inner">
+  <div class="gold-rule anim" style="margin-bottom:.6rem"></div>
+  <div class="slide-title anim">Thank You</div>
+  <div class="slide-subtitle anim" style="margin-top:.35rem">This plan is a living document. Your feedback shapes our direction.<br>Draft v1.0 due to Dean — March 30, 2026.</div>
+  <div class="anim" style="margin-top:1rem;display:flex;gap:.65rem;flex-wrap:wrap;justify-content:center">
+    <a href="plan.html" target="_top" rel="noopener" class="ucf-badge" style="text-decoration:none">📄 View Full Plan</a>
+    <a href="https://ucf.qualtrics.com/jfe/form/SV_6eTZQHve6BlxPzE?section=overall" target="_top" rel="noopener" class="ucf-badge" style="text-decoration:none;border-color:var(--white);color:var(--white)">💬 Take the Feedback Survey</a>
+  </div>
+  <div class="anim" style="margin-top:1.25rem">
+    <div style="font-family:var(--font-mono);font-size:.62rem;color:var(--gray-600);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem">ECE Strategic Planning Committee 2027–2032</div>
+    <div class="committee-grid">
+      <span class="chair">A. Vosoughi (Chair)</span>
+      <span class="chair">M. Borowczak (Co-Chair)</span>
+      <span>A. Behal</span>
+      <span>I. Batarseh</span>
+      <span>C.Y. Chan</span>
+      <span>R. DeMara</span>
+      <span>Y. Fallah</span>
+      <span>H. Kamali</span>
+      <span>T. Nghiem</span>
+      <span>M. Rakhshan</span>
+      <span>J. Wang</span>
+    </div>
+    <div style="font-family:var(--font-mono);font-size:.6rem;color:var(--gray-600);margin-top:.5rem">Department Chair: Dr. Reza Abdolvand</div>
+  </div>
+  <div class="slide-actions anim">
+    <a href="plan.html" target="_top" rel="noopener">📄 View Full Plan Online</a>
+    <a href="https://ucf.qualtrics.com/jfe/form/SV_6eTZQHve6BlxPzE?section=overall" target="_top" rel="noopener" class="feedback">💬 Provide Feedback (Survey)</a>
+  </div>
+</div>
+</div>
+
+</div><!-- /deck -->
+
+<div class="kb-hint">Navigate: <kbd>←</kbd> <kbd>→</kbd> or swipe</div>
+<div class="nav-bar">
+  <button id="prevBtn" disabled>← Prev</button>
+  <div class="nav-center">
+    <div class="slide-dots" id="dots"></div>
+    <span id="slideCounter">1 / 15</span>
+  </div>
+  <button id="nextBtn">Next →</button>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+(function(){
+  const slides=document.querySelectorAll('.slide'),total=slides.length;
+  let current=0;
+  const bar=document.getElementById('progressBar'),counter=document.getElementById('slideCounter'),
+    prev=document.getElementById('prevBtn'),next=document.getElementById('nextBtn'),
+    dotsC=document.getElementById('dots');
+  for(let i=0;i<total;i++){const d=document.createElement('span');if(!i)d.classList.add('active');d.addEventListener('click',()=>goTo(i));dotsC.appendChild(d)}
+  const dots=dotsC.querySelectorAll('span');
+  function goTo(n){if(n<0||n>=total||n===current)return;slides[current].classList.remove('active');slides[current].classList.add('exiting');const old=current;current=n;slides[current].classList.add('active');setTimeout(()=>slides[old].classList.remove('exiting'),450);update()}
+  function update(){bar.style.width=((current+1)/total*100)+'%';counter.textContent=(current+1)+' / '+total;prev.disabled=!current;next.disabled=current===total-1;dots.forEach((d,i)=>d.classList.toggle('active',i===current))}
+  prev.addEventListener('click',()=>goTo(current-1));
+  next.addEventListener('click',()=>goTo(current+1));
+  document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' ')goTo(current+1);if(e.key==='ArrowLeft')goTo(current-1)});
+  let tx=0;
+  document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
+  document.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(dx<-50)goTo(current+1);if(dx>50)goTo(current-1)});
+  update();
+
+  /* ── Link handler: try window.open, fall back to clipboard ── */
+  const toast=document.getElementById('toast');
+  let toastTimer;
+  function showToast(msg){
+    toast.textContent=msg;toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer=setTimeout(()=>toast.classList.remove('show'),2500);
+  }
+  document.querySelectorAll('.slide-actions a, .end-slide .ucf-badge').forEach(a=>{
+    a.addEventListener('click',function(e){
+      const url=this.href;
+      /* Try native navigation first (works in standalone browser) */
+      const w=window.open(url,'_top');
+      if(!w||w.closed){
+        /* Sandbox blocked it — copy URL to clipboard */
+        e.preventDefault();
+        navigator.clipboard.writeText(url).then(
+          ()=>showToast('Link copied — paste in your browser ↗'),
+          ()=>showToast(url)
+        );
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

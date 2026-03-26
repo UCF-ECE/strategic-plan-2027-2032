@@ -1,0 +1,1707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ECE Strategic Plan 2027–2032 | UCF CECS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#FFC904;--gd:#C8A000;--black:#0A0A0A;--ink:#1A1A1A;
+  --ch:#2C2C2C;--sl:#444;--mid:#6B6B6B;--pale:#AAAAAA;
+  --rule:#E4E4E0;--bg:#FAFAF8;--sur:#FFFFFF;
+  --p1:#1E4D8C;--p1l:#E8EFF8;--p2:#1A6B3C;--p2l:#E8F5EE;
+  --p3:#7A2D7E;--p3l:#F5EBF6;--p4:#B85C00;--p4l:#FDF0E4;
+  --sw:270px;--th:52px;--sh:46px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:14px}
+body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--ink);line-height:1.65}
+
+/* TOPBAR */
+.tb{position:fixed;top:0;left:0;right:0;height:var(--th);background:var(--black);display:flex;align-items:center;padding:0 18px;z-index:300;gap:12px;border-bottom:3px solid var(--gold)}
+.tb-badge{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:.14em;text-transform:uppercase}
+.tb-sep{width:1px;height:20px;background:#333}
+.tb-title{font-family:'Libre Baskerville',serif;color:#fff;font-size:13px;flex:1}
+.tb-btn{background:rgba(255,201,4,.1);border:1px solid rgba(255,201,4,.25);color:var(--gold);font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.1em;padding:4px 10px;border-radius:2px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.tb-btn:hover,.tb-btn.on{background:var(--gold);color:var(--black)}
+.tb-ver{font-family:'IBM Plex Mono',monospace;font-size:10px;color:#555;letter-spacing:.05em}
+.mb{display:none;background:none;border:none;color:var(--gold);cursor:pointer;font-size:18px;line-height:1;padding:0 2px}
+
+/* STEPPER */
+.stp{position:fixed;top:var(--th);left:var(--sw);right:0;height:var(--sh);background:var(--sur);border-bottom:1px solid var(--rule);z-index:200;display:flex;align-items:center;padding:0 18px;gap:0;overflow-x:auto;scrollbar-width:none}
+.stp::-webkit-scrollbar{display:none}
+.st{display:flex;align-items:center;flex-shrink:0}
+.st-n{display:flex;align-items:center;gap:5px;cursor:pointer;padding:3px 5px;border-radius:3px;transition:background .15s;white-space:nowrap}
+.st-n:hover{background:#F3F3F0}
+.st-c{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--rule);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--pale);transition:all .2s;flex-shrink:0}
+.st-l{font-size:11px;color:var(--pale);font-weight:500;transition:color .2s}
+.st-line{width:20px;height:1px;background:var(--rule);flex-shrink:0;transition:background .3s}
+.st.done .st-c{background:var(--ink);border-color:var(--ink);color:#fff}
+.st.done .st-l{color:var(--mid)}
+.st.done .st-line{background:var(--ink)}
+.st.cur .st-l{color:var(--ink);font-weight:600}
+.st.cur-0 .st-c{background:var(--gold);border-color:var(--gold);color:var(--black);font-weight:700}
+.st.cur-p1 .st-c{background:var(--p1);border-color:var(--p1);color:#fff;font-weight:700}
+.st.cur-p2 .st-c{background:var(--p2);border-color:var(--p2);color:#fff;font-weight:700}
+.st.cur-p3 .st-c{background:var(--p3);border-color:var(--p3);color:#fff;font-weight:700}
+.st.cur-p4 .st-c{background:var(--p4);border-color:var(--p4);color:#fff;font-weight:700}
+
+/* LAYOUT */
+.layout{display:flex;margin-top:calc(var(--th) + var(--sh));min-height:calc(100vh - var(--th) - var(--sh))}
+
+/* SIDEBAR */
+.sb{position:fixed;top:calc(var(--th)+var(--sh));left:0;width:var(--sw);height:calc(100vh - var(--th) - var(--sh));background:var(--black);overflow-y:auto;z-index:100;scrollbar-width:thin;scrollbar-color:#333 transparent}
+.sb::-webkit-scrollbar{width:3px}
+.sb::-webkit-scrollbar-thumb{background:#333}
+.sb-in{padding:12px 0 40px}
+/* ── FILTER PANEL ────────────────────────────────────────────────────── */
+.fp{padding:0;border-bottom:1px solid #1E1E1E}
+.fp-chips-row{padding:10px 14px 12px;border-bottom:1px solid #181818}
+.fp-h{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:9px;display:flex;align-items:center;justify-content:space-between}
+.fp-g{margin-bottom:8px}
+.fp-gl{font-family:'IBM Plex Mono',monospace;font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:#444;margin-bottom:5px}
+.fp-cs{display:flex;flex-wrap:wrap;gap:3px}
+.ck{display:inline-block;padding:3px 7px;border-radius:2px;font-size:10px;font-family:'IBM Plex Mono',monospace;cursor:pointer;border:1px solid #252525;color:#666;background:transparent;transition:all .15s;letter-spacing:.04em;white-space:nowrap}
+.ck:hover{border-color:#555;color:#AAA}
+.ck.on{color:#fff;border-color:transparent}
+.ck-p1.on{background:var(--p1)}.ck-p2.on{background:var(--p2)}.ck-p3.on{background:var(--p3)}.ck-p4.on{background:var(--p4)}
+.ck-f.on{background:var(--gold);color:var(--black)}.ck-m.on{background:#DDD;color:var(--ink);border-color:#BBB}
+/* Filter mode toggle */
+.fp-mode-row{display:flex;align-items:center;gap:6px;padding:8px 14px;border-bottom:1px solid #181818}
+.fp-mode-lbl{font-family:'IBM Plex Mono',monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#444;flex:1}
+.fp-toggle{display:flex;border-radius:3px;overflow:hidden;border:1px solid #2A2A2A}
+.fp-toggle-opt{padding:3px 8px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.06em;color:#555;cursor:pointer;transition:all .15s;white-space:nowrap}
+.fp-toggle-opt:hover{color:#999}
+.fp-toggle-opt.on{background:var(--gold);color:var(--black);font-weight:600}
+/* ── FILTER STATUS — always visible but idle vs active ── */
+.fp-status{padding:12px 14px 14px}
+.fp-status-idle{display:block}.fp-status-active{display:none}
+.fp-status.on .fp-status-idle{display:none}
+.fp-status.on .fp-status-active{display:block}
+/* Idle state: subtle hint */
+.fp-idle-hint{font-family:'IBM Plex Mono',monospace;font-size:9px;color:#333;letter-spacing:.07em;text-align:center;padding:6px 0}
+/* Active state: big dramatic counts */
+.fp-stat-counts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-bottom:10px}
+.fp-stat-c{background:#111;border:1px solid #252525;border-radius:3px;padding:8px 6px;text-align:center;transition:all .2s}
+.fp-stat-c.has-match{border-color:#3A3A00;background:#1A1800}
+.fp-stat-c.no-match{border-color:#2A2A2A;opacity:.4}
+.fp-stat-num{font-family:'Libre Baskerville',serif;font-size:26px;font-weight:700;color:var(--gold);line-height:1;transition:all .25s}
+.fp-stat-c.no-match .fp-stat-num{color:#333}
+.fp-stat-lbl{font-family:'IBM Plex Mono',monospace;font-size:7.5px;letter-spacing:.12em;text-transform:uppercase;color:#555;margin-top:4px}
+.fp-stat-c.has-match .fp-stat-lbl{color:#888}
+/* ── RESET BUTTON ── */
+.fp-rst{display:block;width:100%;padding:9px 0;border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;border:1px solid #2A2A2A;background:transparent;color:#333;transition:all .2s;text-align:center}
+.fp-rst.on{background:var(--gold);color:var(--black);border-color:var(--gold);font-weight:700;font-size:11px;padding:10px 0;box-shadow:0 0 0 3px rgba(255,201,4,.2),0 4px 16px rgba(255,201,4,.3);animation:rst-pulse 2.5s ease-in-out infinite}
+.fp-rst.on:hover{background:#FFD700;box-shadow:0 0 0 4px rgba(255,201,4,.35),0 6px 20px rgba(255,201,4,.4);animation:none}
+@keyframes rst-pulse{0%,100%{box-shadow:0 0 0 3px rgba(255,201,4,.2),0 4px 16px rgba(255,201,4,.3)}50%{box-shadow:0 0 0 5px rgba(255,201,4,.12),0 4px 20px rgba(255,201,4,.45)}}
+
+/* ── FILTER ACTIVE BANNER — top of main content ── */
+.filter-banner{display:none;position:sticky;top:calc(var(--th) + var(--sh));z-index:150;background:var(--black);border-bottom:2px solid var(--gold);padding:0 44px;margin:0 -44px 28px;animation:bslide .2s ease-out}
+.filter-banner.on{display:flex;align-items:center;gap:0}
+@keyframes bslide{from{transform:translateY(-8px);opacity:0}to{transform:translateY(0);opacity:1}}
+.fb-counts{display:flex;align-items:stretch;gap:0;flex:1}
+.fb-count{display:flex;align-items:center;gap:8px;padding:10px 20px;border-right:1px solid #222}
+.fb-num{font-family:'Libre Baskerville',serif;font-size:22px;font-weight:700;color:var(--gold);line-height:1;min-width:28px;text-align:right}
+.fb-label{display:flex;flex-direction:column;gap:1px}
+.fb-lbl-main{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#888}
+.fb-lbl-sub{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.06em;color:#444}
+.fb-reset{padding:10px 20px;margin-left:auto;display:flex;align-items:center;gap:8px;cursor:pointer;border:none;background:transparent;transition:background .15s;flex-shrink:0}
+.fb-reset:hover{background:#1A1A1A}
+.fb-reset-x{width:22px;height:22px;border-radius:50%;background:var(--gold);color:var(--black);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;transition:transform .15s}
+.fb-reset:hover .fb-reset-x{transform:scale(1.15)}
+.fb-reset-lbl{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.fb-filter-desc{font-family:'IBM Plex Mono',monospace;font-size:9px;color:#555;padding:10px 16px;border-right:1px solid #222;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px}
+
+/* ── FILTER STATE CLASSES ── */
+/* Priority blocks */
+.pb.f-dim{opacity:.12;filter:grayscale(.9);transition:opacity .3s,filter .3s;pointer-events:none}
+.pb.f-dim .ph{opacity:.5}
+.pb.f-hide{display:none}
+.pb.f-match{transition:opacity .2s}
+/* Goal rows */
+.go.f-dim .gh{opacity:.15;transition:opacity .25s}
+.go.f-dim .gb2{display:none !important}
+.go.f-hide{display:none}
+.go.f-match>.gh{background:linear-gradient(to right,rgba(255,201,4,.09),transparent);border-left:3px solid var(--gold)}
+/* Strategy cards */
+.scard.f-match{background:var(--sur);box-shadow:0 2px 12px rgba(0,0,0,.08);border-left:3px solid var(--gold);padding-left:25px;transition:all .2s}
+.scard.f-dim{overflow:hidden;max-height:30px;opacity:.2;transition:max-height .25s ease,opacity .25s;pointer-events:none;cursor:default}
+.scard.f-dim .stags,.scard.f-dim .tg,.scard.f-dim .cxn,.scard.f-dim .brd{display:none}
+.scard.f-dim .sdesc{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.scard.hid{display:none}
+/* Matching priority header highlight */
+.pb.f-match>.ph{box-shadow:inset 0 -3px 0 rgba(255,201,4,.6)}
+/* Matching goal badge */
+.gbdg.flt{background:var(--gold);color:var(--black);font-weight:700;font-size:10.5px;padding:3px 8px}
+/* Priority match badge */
+.pmb.on{color:#fff;background:rgba(255,255,255,.28);font-weight:600}
+.nsl{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:#3A3A3A;padding:14px 16px 4px;display:block}
+.ni{display:flex;align-items:center;gap:8px;padding:6px 16px;color:#777;text-decoration:none;font-size:11.5px;transition:all .15s;border-left:2px solid transparent;cursor:pointer}
+.ni:hover{color:#CCC;background:rgba(255,255,255,.04)}
+.ni.on{color:var(--gold);border-left-color:var(--gold);background:rgba(255,201,4,.06)}
+.nd{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.nd-p1{background:var(--p1)}.nd-p2{background:var(--p2)}.nd-p3{background:var(--p3)}.nd-p4{background:var(--p4)}.nd-g{background:#3A3A3A}
+.ns{display:flex;align-items:center;gap:8px;padding:4px 16px 4px 32px;color:#444;font-size:11px;transition:color .15s;cursor:pointer}
+.ns:hover{color:#888}.ns.on{color:var(--gold)}
+
+/* MAIN */
+.mn{margin-left:var(--sw);flex:1;max-width:940px;padding:40px 44px 72px}
+.sa{scroll-margin-top:calc(var(--th) + var(--sh) + 14px)}
+
+/* HERO */
+.hero{padding:40px 0 36px;border-bottom:1px solid var(--rule);margin-bottom:48px}
+.h-eye{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);margin-bottom:12px}
+.h-t{font-family:'Libre Baskerville',serif;font-size:34px;font-weight:700;color:var(--ink);line-height:1.2;margin-bottom:5px}
+.h-t span{color:var(--gd)}
+.h-sub{font-family:'Libre Baskerville',serif;font-size:16px;color:var(--mid);margin-bottom:22px}
+.h-mr{display:flex;flex-wrap:wrap;gap:20px;margin-bottom:12px}
+.committee-row{display:flex;align-items:baseline;gap:8px;margin-bottom:20px;padding:8px 12px;background:#F3F3F0;border-radius:3px;flex-wrap:wrap}
+.committee-label{font-family:'IBM Plex Mono',monospace;font-size:9.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--pale);white-space:nowrap}
+.committee-members{font-size:12px;color:var(--mid);line-height:1.5}
+.h-m{display:flex;flex-direction:column;gap:2px}
+.hml{font-size:9.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--pale);font-family:'IBM Plex Mono',monospace}
+.hmv{font-size:12.5px;font-weight:500;color:var(--ink)}
+.pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.pill{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:3px;font-size:11px;font-weight:600;cursor:pointer;transition:opacity .15s}
+.pill:hover{opacity:.85}
+.pi-1{background:var(--p1);color:#fff}.pi-2{background:var(--p2);color:#fff}.pi-3{background:var(--p3);color:#fff}.pi-4{background:var(--p4);color:#fff}
+/* ARC node shared styles (kept for .an/.an-n/.an-t/.an-d refs) */
+.an{display:flex;flex-direction:column;align-items:center;gap:5px;padding:11px 12px;border-radius:4px;border:1.5px solid;text-align:center}
+.an-n{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1px}
+.an-t{font-size:11px;font-weight:700}.an-d{font-size:9.5px;opacity:.7;line-height:1.4;margin-top:2px}
+.a-p1{border-color:var(--p1);background:var(--p1l);color:var(--p1)}
+.a-p2{border-color:var(--p2);background:var(--p2l);color:var(--p2)}
+.a-p3{border-color:var(--p3);background:var(--p3l);color:var(--p3)}
+.a-p4{border-color:var(--p4);background:var(--p4l);color:var(--p4)}
+/* OPTION F — Dashboard Cards · Spotlight Outcome */
+.of-grid{margin-top:22px;display:grid;grid-template-columns:1fr 1fr 1fr 3px 1.6fr;align-items:stretch;gap:0}
+.of-input{padding:14px 14px;border:1.5px solid var(--rule);border-right:none;background:var(--bg);display:flex;flex-direction:column;gap:4px;cursor:pointer;transition:background .15s;min-width:0;overflow:hidden}
+.of-input:hover{background:#EEEEED}
+.of-input:first-child{border-radius:6px 0 0 6px}
+.of-input+.of-input{border-left:1px dashed var(--rule)}
+.of-bar{height:3px;border-radius:2px;margin-bottom:5px;width:28px;flex-shrink:0}
+.of-bar-p1{background:var(--p1)}.of-bar-p2{background:var(--p2)}.of-bar-p3{background:var(--p3)}
+.of-lbl{font-family:'IBM Plex Mono',monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.of-lbl-p1{color:var(--p1)}.of-lbl-p2{color:var(--p2)}.of-lbl-p3{color:var(--p3)}
+.of-in-title{font-size:12px;font-weight:700;color:var(--ink);overflow:hidden;text-overflow:ellipsis;hyphens:auto}
+.of-in-sub{font-size:10.5px;color:var(--mid);line-height:1.4;flex:1;overflow:hidden}
+.of-strat{font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--pale);margin-top:2px;white-space:nowrap}
+.of-divider{background:repeating-linear-gradient(to bottom,var(--p4) 0,var(--p4) 6px,transparent 6px,transparent 10px);flex-shrink:0}
+.of-output{background:linear-gradient(135deg,var(--p4) 0%,#8B4400 100%);border-radius:0 6px 6px 0;padding:18px 16px;display:flex;flex-direction:column;justify-content:center;gap:4px;cursor:pointer;transition:opacity .15s;min-width:0;overflow:hidden}
+.of-output:hover{opacity:.92}
+.of-out-lbl{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--gd);white-space:nowrap}
+.of-out-title{font-family:'Libre Baskerville',serif;font-size:16px;font-weight:700;color:#fff;line-height:1.25}
+.of-out-sub{font-size:11px;color:rgba(255,255,255,.8);line-height:1.5;overflow:hidden}
+.of-out-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.of-tag{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--gd);border:1px solid rgba(200,160,0,.4);padding:2px 6px;border-radius:2px;background:rgba(200,160,0,.08);white-space:nowrap}
+/* Tier 1 (≤1100px, still 3-col): drop subtitle text from inputs */
+@media(max-width:1100px) and (min-width:741px){
+  .of-in-sub{display:none}
+  .of-out-sub{display:none}
+}
+/* Tier 2 (≤860px, still 3-col, cards very narrow): also drop strategy count + P4 tags */
+@media(max-width:860px) and (min-width:741px){
+  .of-strat{display:none}
+  .of-out-tags{display:none}
+  .of-input{padding:12px 10px}
+  .of-output{padding:12px 12px}
+  .of-in-title{font-size:11px}
+  .of-out-title{font-size:14px}
+}
+/* ≤740px: layout switches to 2+1 grid — restore all text */
+@media(max-width:740px){
+  .of-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto auto auto 3px auto}
+  .of-input{border-right:1.5px solid var(--rule);border-bottom:none}
+  .of-input:nth-child(1){border-radius:6px 0 0 0}
+  .of-input:nth-child(2){border-left:1.5px solid var(--rule);border-radius:0 6px 0 0}
+  .of-input:nth-child(3){grid-column:1/-1;border-bottom:none;border-radius:0}
+  .of-divider{grid-column:1/-1;width:auto;height:3px;background:repeating-linear-gradient(to right,var(--p4) 0,var(--p4) 6px,transparent 6px,transparent 10px)}
+  .of-output{grid-column:1/-1;border-radius:0 0 6px 6px}
+  /* All text visible again — cards have full width */
+  .of-in-sub,.of-out-sub,.of-strat,.of-out-tags{display:flex}
+  .of-in-sub{display:block}
+  .of-out-sub{display:block}
+  .of-strat{display:block}
+}
+@media(max-width:480px){
+  .of-grid{grid-template-columns:1fr}
+  .of-input:nth-child(1){border-radius:6px 6px 0 0}
+  .of-input:nth-child(2){border-left:1.5px solid var(--rule)}
+  .of-output{border-radius:0 0 6px 6px}
+}
+/* WALKTHROUGH */
+.wt-section{background:var(--sur);border:1px solid var(--rule);border-radius:6px;padding:34px 38px 30px;margin-bottom:48px}
+.wt-eye{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);margin-bottom:9px}
+.wt-title{font-family:'Libre Baskerville',serif;font-size:22px;font-weight:700;color:var(--ink);margin-bottom:7px}
+.wt-sub{font-size:12.5px;color:var(--mid);line-height:1.65;max-width:660px;margin-bottom:24px}
+/* Audience cards */
+.aud-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:26px}
+.aud-card{border:1px solid var(--rule);border-radius:5px;padding:16px 14px;background:var(--bg);transition:border-color .15s}
+.aud-card:hover{border-color:var(--gold)}
+.aud-icon{font-size:18px;margin-bottom:7px}
+.aud-title{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:5px}
+.aud-desc{font-size:11.5px;color:var(--mid);line-height:1.5;margin-bottom:11px}
+.aud-read-label{font-family:'IBM Plex Mono',monospace;font-size:8.5px;text-transform:uppercase;letter-spacing:.12em;color:var(--pale);margin-bottom:5px}
+.aud-tag{display:inline-block;padding:3px 7px;border-radius:2px;font-size:10px;font-weight:500;background:#F0F0EE;color:var(--sl);border:1px solid var(--rule);cursor:pointer;margin:2px 2px 0 0;transition:all .15s;white-space:nowrap}
+.aud-tag:hover{background:var(--gold);color:var(--black);border-color:var(--gold)}
+/* Narrative timeline */
+.narr-wrap{margin-bottom:22px}
+.narr-title{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--pale);margin-bottom:10px}
+.narr-timeline{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch;gap:0}
+.narr-conn{display:flex;align-items:center;justify-content:center;color:var(--pale);font-size:13px;padding:0 8px;flex-shrink:0}
+.narr-phase{border-radius:4px;border:1px solid var(--rule);overflow:hidden}
+.narr-ph-head{padding:9px 13px;border-bottom:1px solid var(--rule)}
+.narr-ph-yr{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.09em;text-transform:uppercase;margin-bottom:2px}
+.narr-ph-lbl{font-size:12px;font-weight:700;color:var(--ink)}
+.narr-ph-body{padding:10px 13px;font-size:11px;color:var(--mid);line-height:1.55}
+.narr-y1 .narr-ph-head{background:var(--p1l);border-bottom-color:#C8D8EE}.narr-y1 .narr-ph-yr{color:var(--p1)}
+.narr-y3 .narr-ph-head{background:#F0F8F3;border-bottom-color:#C0DFD0}.narr-y3 .narr-ph-yr{color:var(--p2)}
+.narr-y5 .narr-ph-head{background:var(--p4l);border-bottom-color:#E8C8A0}.narr-y5 .narr-ph-yr{color:var(--p4)}
+/* Commit grid */
+.commit-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:9px}
+.commit-card{border:1px solid var(--rule);border-radius:4px;padding:12px 8px;text-align:center;background:var(--bg)}
+.commit-num{font-family:'Libre Baskerville',serif;font-size:24px;font-weight:700;margin-bottom:3px}
+.commit-lbl{font-size:10.5px;font-weight:600;color:var(--ink);margin-bottom:3px;line-height:1.3}
+.commit-sub{font-size:9px;color:var(--mid);line-height:1.4}
+.commit-p1 .commit-num{color:var(--p1)}.commit-p2 .commit-num{color:var(--p2)}
+.commit-p3 .commit-num{color:var(--p3)}.commit-p4 .commit-num{color:var(--p4)}
+.commit-ucf .commit-num{color:var(--gd)}
+@media(max-width:900px){
+  .wt-section{padding:22px 16px 20px}
+  .aud-grid{grid-template-columns:1fr}
+  .narr-timeline{grid-template-columns:1fr;gap:0}
+  .narr-conn{padding:4px 0;font-size:11px}
+  .commit-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:480px){.commit-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* SECTIONS */
+.sec{margin-bottom:56px}
+.sh{display:flex;align-items:baseline;gap:11px;margin-bottom:22px;padding-bottom:10px;border-bottom:1px solid var(--rule)}
+.sn{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--pale);letter-spacing:.1em}
+.st2{font-family:'Libre Baskerville',serif;font-size:21px;font-weight:700;color:var(--ink)}
+.sg{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:22px}
+.sc{background:var(--sur);border:1px solid var(--rule);border-radius:4px;padding:16px 15px}
+.sv{font-family:'Libre Baskerville',serif;font-size:22px;font-weight:700;color:var(--ink);margin-bottom:3px}
+.sl2{font-size:11px;color:var(--mid);line-height:1.4}
+.gb{background:#FFFBE8;border-left:4px solid var(--gold);padding:13px 16px;border-radius:0 4px 4px 0;margin-bottom:22px;font-size:12.5px;color:var(--ch);line-height:1.65}
+.ptags{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+.ptag{background:var(--sur);border:1px solid var(--rule);border-radius:3px;padding:3px 8px;font-size:11px;color:var(--sl)}
+.mg2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.mc{background:var(--sur);border:1px solid var(--rule);border-radius:4px;padding:20px 18px}
+.mcl{font-family:'IBM Plex Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.18em;color:var(--pale);margin-bottom:9px}
+.mct{font-family:'Libre Baskerville',serif;font-size:13px;line-height:1.75;color:var(--sl);font-style:italic}
+.mg3{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.mgc{background:var(--sur);border:1px solid var(--rule);border-radius:4px;padding:13px 14px}
+.mgt{font-size:11px;font-weight:700;margin-bottom:6px;padding-bottom:5px;border-bottom-width:2px;border-bottom-style:solid}
+.mgt-1{border-color:var(--p1);color:var(--p1)}.mgt-2{border-color:var(--p2);color:var(--p2)}
+.mgt-3{border-color:var(--p3);color:var(--p3)}.mgt-4{border-color:var(--p4);color:var(--p4)}
+.mi{font-size:11px;color:var(--mid);padding:2px 0;display:flex;gap:5px;align-items:flex-start}
+.mi::before{content:'—';color:var(--rule);flex-shrink:0}
+.fprow{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+.fp2{padding:3px 9px;border-radius:3px;font-size:11px;font-weight:500;background:#F0F0EE;color:var(--sl);border:1px solid var(--rule)}
+
+/* VIZ */
+.vt-row{display:flex;gap:0;border-bottom:1px solid var(--rule)}
+.vt{padding:9px 18px;font-size:12px;font-weight:500;color:var(--mid);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s;white-space:nowrap}
+.vt:hover{color:var(--ink)}.vt.on{color:var(--ink);border-bottom-color:var(--gold);font-weight:600}
+.vp{display:none;padding:18px 0}.vp.on{display:block}
+.vn{font-size:11px;color:var(--mid);margin-bottom:13px;font-style:italic}
+.vc{background:var(--sur);border:1px solid var(--rule);border-radius:4px;overflow:hidden}
+/* Coverage bars */
+.cbr{display:flex;align-items:center;gap:9px;margin-bottom:5px}
+.cbl{font-family:'IBM Plex Mono',monospace;font-size:9.5px;width:46px;flex-shrink:0;text-align:right}
+.cbt{flex:1;height:14px;background:#F0F0EE;border-radius:2px;overflow:hidden;cursor:pointer;transition:opacity .15s}
+.cbt:hover{opacity:.8}
+.cbf{height:100%;border-radius:2px;transition:width .5s ease;display:flex;align-items:center;justify-content:flex-end;padding-right:5px}
+.cbc{font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:700;color:rgba(255,255,255,.9)}
+.csl{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--pale);margin:14px 0 6px;padding-left:55px}
+.cfg{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:12px 16px 16px}
+.cfc{border:1px solid var(--rule);border-radius:4px;padding:10px;text-align:center;cursor:pointer;transition:all .15s}
+.cfc:hover{border-color:var(--gold)}.cfc.on{border-color:var(--gold);background:#FFFBE8}
+.cfn{font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:700;margin-bottom:2px}
+.cflb{font-size:9px;color:var(--mid);line-height:1.35}.cfb{font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--pale);margin-top:3px}
+.cleg{display:flex;align-items:center;justify-content:flex-end;gap:9px;padding:10px 16px 8px;flex-wrap:wrap}
+.cld{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--mid)}
+.cldd{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+/* Network */
+.nleg{display:flex;flex-wrap:wrap;gap:9px;padding:9px 16px;border-top:1px solid var(--rule);background:#F7F7F5}
+.nl{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--mid)}
+.nlc{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+
+/* PRIORITY BLOCKS */
+.pb{margin-bottom:60px}
+.ph{display:flex;align-items:center;gap:12px;padding:16px 19px;border-radius:4px 4px 0 0}
+.ph-p1{background:var(--p1)}.ph-p2{background:var(--p2)}.ph-p3{background:var(--p3)}.ph-p4{background:var(--p4)}
+.pn{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,.6);letter-spacing:.12em;text-transform:uppercase}
+.pt2{font-family:'Libre Baskerville',serif;font-size:18px;font-weight:700;color:#fff}
+.pmb{margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:rgba(255,255,255,.5);background:rgba(0,0,0,.2);padding:3px 7px;border-radius:2px}
+.pmb.on{color:#fff;background:rgba(255,255,255,.22)}
+.go{border:1px solid var(--rule);border-top:none}
+.go:last-child{border-radius:0 0 4px 4px}
+.gh{display:flex;align-items:center;gap:10px;padding:13px 18px;background:var(--sur);border-bottom:1px solid var(--rule);cursor:pointer;user-select:none;transition:background .12s}
+.gh:hover{background:#F7F7F5}
+.gc2{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--pale);letter-spacing:.07em;flex-shrink:0;width:48px}
+.gt2{font-size:13px;font-weight:600;color:var(--ink);flex:1}
+.gbdg{font-family:'IBM Plex Mono',monospace;font-size:9.5px;background:#F0F0EE;color:var(--mid);padding:2px 6px;border-radius:2px;flex-shrink:0}
+.gbdg.flt{background:var(--gold);color:var(--black)}
+.gch{color:var(--pale);font-size:11px;transition:transform .2s;flex-shrink:0}
+.gh.op .gch{transform:rotate(90deg)}
+.gb2{display:none;background:#F9F9F7;border-bottom:1px solid var(--rule)}
+.gb2.op{display:block}
+.ge2{padding:16px 20px;font-size:12px;color:var(--pale);font-style:italic;text-align:center;display:none}
+
+/* Strategy cards */
+.scard{padding:16px 18px 14px 28px;border-bottom:1px solid var(--rule);transition:opacity .2s}
+.scard:last-child{border-bottom:none}
+.scard.hid{display:none}
+.stop2{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px}
+.scode{font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--pale);letter-spacing:.06em;flex-shrink:0;margin-top:2px;width:70px}
+.sdesc{font-size:12.5px;color:var(--ch);line-height:1.6;flex:1}
+.stags{display:flex;flex-wrap:wrap;gap:3px;margin:5px 0 9px 80px}
+.stag{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--mid);background:#EDEDE9;padding:2px 5px;border-radius:2px;cursor:pointer;transition:all .15s;letter-spacing:.04em}
+.stag:hover{background:var(--gold);color:var(--black)}
+.stag.cx{border:1px solid #C8AA44;color:#7A5A00;background:#FFF8D6}
+.stag.cx:hover{background:var(--gold);color:var(--black)}
+.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 4px 80px}
+.tc{background:var(--sur);border:1px solid var(--rule);border-radius:3px;padding:9px 10px}
+.th2{font-family:'IBM Plex Mono',monospace;font-size:9px;display:flex;align-items:center;gap:3px;margin-bottom:4px;text-transform:uppercase;letter-spacing:.09em}
+.td2{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.d1{background:#3B82F6}.d3{background:#F59E0B}.d5{background:#10B981}
+.tc1{color:#3B82F6}.tc3{color:#F59E0B}.tc5{color:#10B981}
+.tt2{font-size:11px;color:var(--sl);line-height:1.5}
+.cxn{margin:6px 0 4px 80px;padding:6px 9px;background:#FFF8D6;border-left:3px solid var(--gd);border-radius:0 3px 3px 0;font-size:11px;color:#7A5A00;line-height:1.5}
+.brd{margin:8px 16px 12px;padding:11px 13px;background:var(--sur);border:1px solid var(--rule);border-radius:4px}
+.brd-t{font-family:'IBM Plex Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:var(--pale);margin-bottom:6px}
+.brd-ls{display:flex;flex-wrap:wrap;gap:5px}
+.brd-l{padding:3px 9px;border-radius:3px;font-size:11px;cursor:pointer;border:1px solid var(--rule);transition:all .15s;color:var(--sl)}
+.brd-l:hover{border-color:var(--gold);color:var(--ink)}
+
+/* RESOURCES */
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+.rct{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:9px;padding-bottom:6px;border-bottom:2px solid var(--gold)}
+.ri{display:flex;gap:7px;margin-bottom:8px;font-size:12px;color:var(--sl);line-height:1.55;align-items:flex-start}
+.ra{flex-shrink:0;margin-top:2px;color:var(--pale);font-size:10px}
+.ag{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
+.ac{background:var(--sur);border:1px solid var(--rule);border-radius:4px;padding:15px 13px}
+.ai{font-size:17px;margin-bottom:6px}.at{font-size:11.5px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.ad{font-size:11px;color:var(--mid);line-height:1.5}
+.ft{border-top:1px solid var(--rule);padding:22px 0;margin-top:32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:9px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--pale)}
+.tip{position:fixed;background:var(--black);color:#fff;padding:7px 11px;border-radius:4px;font-size:11px;pointer-events:none;z-index:999;max-width:220px;line-height:1.5;border:1px solid #333;display:none}
+
+@media(max-width:900px){
+  :root{--sw:0px}
+  .sb{transform:translateX(-270px);width:270px;transition:transform .25s}
+  .sb.op{transform:translateX(0)}
+  .stp{left:0}
+  .mn{margin-left:0;padding:28px 18px 56px}
+  .mb{display:block}
+  .sg{grid-template-columns:1fr 1fr}.mg2,.r2,.mg3{grid-template-columns:1fr}
+  .tg{margin-left:0;grid-template-columns:1fr}
+  .stags{margin-left:0}.cxn{margin-left:0}.ag{grid-template-columns:1fr 1fr}
+  .cfg{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+</head>
+<body>
+<div class="tip" id="tip"></div>
+<!-- TOPBAR -->
+<div class="tb">
+  <button class="mb" onclick="tgSB()">☰</button>
+  <span class="tb-badge">UCF · CECS · ECE</span>
+  <div class="tb-sep"></div>
+  <span class="tb-title">Strategic Plan 2027–2032</span>
+  <button class="tb-btn" id="fbtn" onclick="tgFP()">⧖ Filters</button>
+  <span class="tb-ver">DRAFT v0.5 · Mar 25, 2026</span>
+</div>
+<!-- STEPPER -->
+<div class="stp" id="stp"></div>
+
+<div class="layout">
+<!-- SIDEBAR -->
+<nav class="sb" id="sb">
+  <div class="sb-in">
+    <div class="fp" id="fpanel">
+      <!-- Chip filters -->
+      <div class="fp-chips-row">
+        <div class="fp-h">Filter Strategies</div>
+        <div class="fp-g">
+          <div class="fp-gl">ECE Priority</div>
+          <div class="fp-cs">
+            <span class="ck ck-p1" data-f="priority" data-v="P1" onclick="tgF(this)">P1 Student</span>
+            <span class="ck ck-p2" data-f="priority" data-v="P2" onclick="tgF(this)">P2 Discovery</span>
+            <span class="ck ck-p3" data-f="priority" data-v="P3" onclick="tgF(this)">P3 Community</span>
+            <span class="ck ck-p4" data-f="priority" data-v="P4" onclick="tgF(this)">P4 Innovation</span>
+          </div>
+        </div>
+        <div class="fp-g">
+          <div class="fp-gl">UCF Focus Area</div>
+          <div class="fp-cs">
+            <span class="ck ck-f" data-f="fcode" data-v="F-1" onclick="tgF(this)">F-1</span>
+            <span class="ck ck-f" data-f="fcode" data-v="F-2" onclick="tgF(this)">F-2</span>
+            <span class="ck ck-f" data-f="fcode" data-v="F-3" onclick="tgF(this)">F-3</span>
+            <span class="ck ck-f" data-f="fcode" data-v="F-4" onclick="tgF(this)">F-4</span>
+            <span class="ck ck-f" data-f="fcode" data-v="F-5" onclick="tgF(this)">F-5</span>
+          </div>
+        </div>
+        <div class="fp-g">
+          <div class="fp-gl">UCF Metric Group</div>
+          <div class="fp-cs">
+            <span class="ck ck-m" data-f="pgroup" data-v="P-1" onclick="tgF(this)">P-1</span>
+            <span class="ck ck-m" data-f="pgroup" data-v="P-2" onclick="tgF(this)">P-2</span>
+            <span class="ck ck-m" data-f="pgroup" data-v="P-3" onclick="tgF(this)">P-3</span>
+            <span class="ck ck-m" data-f="pgroup" data-v="P-4" onclick="tgF(this)">P-4</span>
+          </div>
+        </div>
+      </div><!-- /fp-chips-row -->
+      <!-- Non-match display mode -->
+      <div class="fp-mode-row">
+        <span class="fp-mode-lbl">Non-matches</span>
+        <div class="fp-toggle">
+          <div class="fp-toggle-opt on" id="tgl-dim" onclick="setMode('dim')">◐ Dim</div>
+          <div class="fp-toggle-opt" id="tgl-hide" onclick="setMode('hide')">✕ Hide</div>
+        </div>
+      </div>
+      <!-- Filter status: idle hint / active counts -->
+      <div class="fp-status" id="fp-status">
+        <div class="fp-status-idle">
+          <div class="fp-idle-hint">Select a filter above</div>
+        </div>
+        <div class="fp-status-active">
+          <div class="fp-stat-counts">
+            <div class="fp-stat-c" id="fsc-s">
+              <div class="fp-stat-num" id="fsc-s-num">31</div>
+              <div class="fp-stat-lbl">Strategies</div>
+            </div>
+            <div class="fp-stat-c" id="fsc-g">
+              <div class="fp-stat-num" id="fsc-g-num">12</div>
+              <div class="fp-stat-lbl">Goals</div>
+            </div>
+            <div class="fp-stat-c" id="fsc-p">
+              <div class="fp-stat-num" id="fsc-p-num">4</div>
+              <div class="fp-stat-lbl">Priorities</div>
+            </div>
+          </div>
+          <button class="fp-rst on" id="fp-rst-btn" onclick="resetF()">✕ Clear Filter</button>
+        </div>
+      </div>
+    </div>
+    <span class="nsl">Navigate</span>
+    <a class="ni" onclick="gt('overview')"><span class="nd nd-g"></span>Overview</a>
+    <a class="ni" onclick="gt('mission')"><span class="nd nd-g"></span>Mission &amp; Vision</a>
+    <a class="ni" onclick="gt('ucfalign')"><span class="nd nd-g"></span>UCF Alignment</a>
+    <a class="ni" onclick="gt('walkthrough')"><span class="nd nd-g"></span>Reading Guide</a>
+    <a class="ni" onclick="gt('vizsec')"><span class="nd nd-g"></span>Strategy Map</a>
+    <span class="nsl">Priorities</span>
+    <a class="ni" onclick="gt('p1')"><span class="nd nd-p1"></span>P1 · Student Success</a>
+    <a class="ns" onclick="gt('p1g1')">G1 · Flexible Learning</a>
+    <a class="ns" onclick="gt('p1g2')">G2 · Technology Curve</a>
+    <a class="ns" onclick="gt('p1g3')">G3 · Industry Gap</a>
+    <a class="ni" onclick="gt('p2')"><span class="nd nd-p2"></span>P2 · Discovery</a>
+    <a class="ns" onclick="gt('p2g1')">G1 · Research Labs</a>
+    <a class="ns" onclick="gt('p2g2')">G2 · Commercialization</a>
+    <a class="ns" onclick="gt('p2g3')">G3 · PhD Enrollment</a>
+    <a class="ni" onclick="gt('p3')"><span class="nd nd-p3"></span>P3 · Community</a>
+    <a class="ns" onclick="gt('p3g1')">G1 · Celebrate Excellence</a>
+    <a class="ns" onclick="gt('p3g2')">G2 · Alumni &amp; Industry</a>
+    <a class="ns" onclick="gt('p3g3')">G3 · Inclusive Culture</a>
+    <a class="ni" onclick="gt('p4')"><span class="nd nd-p4"></span>P4 · Innovation</a>
+    <a class="ns" onclick="gt('p4g1')">G1 · National Ranking</a>
+    <a class="ns" onclick="gt('p4g2')">G2 · Growth Programs</a>
+    <a class="ns" onclick="gt('p4g3')">G3 · Signature Programs</a>
+    <span class="nsl">Resources</span>
+    <a class="ni" onclick="gt('resources')"><span class="nd nd-g"></span>Resources &amp; Acquisition</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="mn">
+
+<!-- FILTER ACTIVE BANNER — appears when any filter is on -->
+<div class="filter-banner" id="filter-banner">
+  <div class="fb-counts">
+    <div class="fb-count">
+      <div class="fb-num" id="fb-s-num">31</div>
+      <div class="fb-label">
+        <div class="fb-lbl-main">Strategies</div>
+        <div class="fb-lbl-sub">matching</div>
+      </div>
+    </div>
+    <div class="fb-count">
+      <div class="fb-num" id="fb-g-num">12</div>
+      <div class="fb-label">
+        <div class="fb-lbl-main">Goals</div>
+        <div class="fb-lbl-sub">with matches</div>
+      </div>
+    </div>
+    <div class="fb-count">
+      <div class="fb-num" id="fb-p-num">4</div>
+      <div class="fb-label">
+        <div class="fb-lbl-main">Priorities</div>
+        <div class="fb-lbl-sub">with matches</div>
+      </div>
+    </div>
+    <div class="fb-filter-desc" id="fb-filter-desc"></div>
+  </div>
+  <button class="fb-reset" onclick="resetF()">
+    <div class="fb-reset-x">✕</div>
+    <span class="fb-reset-lbl">Clear</span>
+  </button>
+</div>
+
+<!-- HERO -->
+<div class="hero sa" id="hero">
+  <div class="h-eye">Strategic Plan · 2027–2032</div>
+  <h1 class="h-t">Department of<br><span>Electrical &amp; Computer Engineering</span></h1>
+  <div class="h-sub">College of Engineering and Computer Science · University of Central Florida</div>
+  <div class="h-mr">
+    <div class="h-m"><span class="hml">Dept Chair</span><span class="hmv">Dr. Reza Abdolvand</span></div>
+    <div class="h-m"><span class="hml">Committee Chair</span><span class="hmv">A. Vosoughi</span></div>
+    <div class="h-m"><span class="hml">Co-Chair</span><span class="hmv">M. Borowczak</span></div>
+    <div class="h-m"><span class="hml">Plan Period</span><span class="hmv">2027–2032</span></div>
+    <div class="h-m"><span class="hml">Status</span><span class="hmv">Draft v0.5 → Dean Mar 30, 2026</span></div>
+  </div>
+  <div class="committee-row">
+    <span class="committee-label">Strategic Planning Committee:</span>
+    <span class="committee-members">A. Vosoughi (Chair) · M. Borowczak (Co-Chair) · A. Behal · I. Batarseh · C.Y. Chan · R. DeMara · Y. Fallah · H. Kamali · T. Nghiem · M. Rakhshan · J. Wang</span>
+  </div>
+  <div class="pills">
+    <span class="pill pi-1" onclick="gt('p1')">P1 · Student Success &amp; Well-Being</span>
+    <span class="pill pi-2" onclick="gt('p2')">P2 · Discovery &amp; Exploration</span>
+    <span class="pill pi-3" onclick="gt('p3')">P3 · Community &amp; Culture</span>
+    <span class="pill pi-4" onclick="gt('p4')">P4 · Innovation &amp; Sustainability</span>
+  </div>
+  <!-- OPTION F — Dashboard Cards · Spotlight Outcome -->
+  <div class="of-grid">
+    <div class="of-input" onclick="gt('p1')">
+      <div class="of-bar of-bar-p1"></div>
+      <div class="of-lbl of-lbl-p1">Priority 1</div>
+      <div class="of-in-title">Student Success &amp; Well-Being</div>
+      <div class="of-in-sub">Flexible curricula · AI-ready graduates · industry alignment</div>
+      <div class="of-strat">14 strategies</div>
+    </div>
+    <div class="of-input" onclick="gt('p2')">
+      <div class="of-bar of-bar-p2"></div>
+      <div class="of-lbl of-lbl-p2">Priority 2</div>
+      <div class="of-in-title">Discovery &amp; Exploration</div>
+      <div class="of-in-sub">Research labs · PhD pipeline · commercialization</div>
+      <div class="of-strat">7 strategies</div>
+    </div>
+    <div class="of-input" onclick="gt('p3')">
+      <div class="of-bar of-bar-p3"></div>
+      <div class="of-lbl of-lbl-p3">Priority 3</div>
+      <div class="of-in-title">Community &amp; Culture</div>
+      <div class="of-in-sub">Excellence culture · alumni networks · inclusive environment</div>
+      <div class="of-strat">8 strategies</div>
+    </div>
+    <div class="of-divider"></div>
+    <div class="of-output" onclick="gt('p4')">
+      <div class="of-out-lbl">Priority 4 · Outcome</div>
+      <div class="of-out-title">Innovation &amp;<br>Sustainability</div>
+      <div class="of-out-sub">National rankings · signature programs · long-term revenue and institutional growth</div>
+      <div class="of-out-tags">
+        <span class="of-tag">6 strategies</span>
+        <span class="of-tag">21 UCF metrics</span>
+        <span class="of-tag">31 total</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WALKTHROUGH / READING GUIDE -->
+<div class="wt-section sa" id="walkthrough">
+  <div class="wt-header">
+    <div class="wt-eye">How to Read This Plan</div>
+    <h2 class="wt-title">A Plan for Multiple Audiences</h2>
+    <p class="wt-sub">This strategic plan operates at three levels. Use the guide below to find the sections most relevant to your role, then explore the Strategy Map (§4) to see how ECE's goals align to UCF's institutional metrics.</p>
+  </div>
+
+  <div class="aud-grid">
+    <div class="aud-card">
+      <div class="aud-icon">🎓</div>
+      <div class="aud-title">Faculty</div>
+      <div class="aud-desc">Interested in how the plan shapes your teaching, research, and service expectations over the next five years.</div>
+      <div class="aud-reads">
+        <div class="aud-read-label">Start with</div>
+        <span class="aud-tag" onclick="gt('mission')">§2 Mission &amp; Vision</span>
+        <span class="aud-tag" onclick="gt('p1')">P1 · Curriculum &amp; AI</span>
+        <span class="aud-tag" onclick="gt('p2')">P2 · Research Labs</span>
+        <span class="aud-tag" onclick="gt('p3')">P3 · Culture &amp; Awards</span>
+      </div>
+    </div>
+    <div class="aud-card">
+      <div class="aud-icon">🏢</div>
+      <div class="aud-title">Department Administration</div>
+      <div class="aud-desc">Responsible for executing strategies, tracking KPIs, and managing resources across the 5-year horizon.</div>
+      <div class="aud-reads">
+        <div class="aud-read-label">Start with</div>
+        <span class="aud-tag" onclick="gt('vizsec')">§4 Strategy Map</span>
+        <span class="aud-tag" onclick="svt_and_go(1)">Coverage &amp; Gaps</span>
+        <span class="aud-tag" onclick="gt('resources')">§9 Resources</span>
+        <span class="aud-tag" onclick="svt_and_go(2)">Goal Network</span>
+      </div>
+    </div>
+    <div class="aud-card">
+      <div class="aud-icon">🏛️</div>
+      <div class="aud-title">College &amp; Provost Level</div>
+      <div class="aud-desc">Evaluating ECE's contribution to CECS and UCF strategic priorities, performance-funding, and rankings trajectory.</div>
+      <div class="aud-reads">
+        <div class="aud-read-label">Start with</div>
+        <span class="aud-tag" onclick="gt('ucfalign')">§3 UCF Alignment</span>
+        <span class="aud-tag" onclick="svt_and_go(0)">Alignment Matrix</span>
+        <span class="aud-tag" onclick="gt('p4')">P4 · Sustainability</span>
+        <span class="aud-tag" onclick="gt('resources')">Resource Channels</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5-year narrative arc -->
+  <div class="narr-wrap">
+    <div class="narr-title">The Five-Year Arc</div>
+    <div class="narr-timeline">
+      <div class="narr-phase narr-p1">
+        <div class="narr-phase-head">
+          <div class="narr-phase-yr">Year 1</div>
+          <div class="narr-phase-lbl">Baseline &amp; Launch</div>
+        </div>
+        <div class="narr-phase-body">Audit labs and curricula. Launch 1–2 online programs. Reconvene IAB and Future Curriculum committees. Establish satisfaction baselines. Seed the Entrepreneurship and FFL Laureate cohorts.</div>
+      </div>
+      <div class="narr-connector">▶</div>
+      <div class="narr-phase narr-p2">
+        <div class="narr-phase-head">
+          <div class="narr-phase-yr">Years 2–3</div>
+          <div class="narr-phase-lbl">Build &amp; Demonstrate</div>
+        </div>
+        <div class="narr-phase-body">First online MS enrolling. Remote-lab infrastructure live. Lab modernization Phase 1 complete. AI integration in 30%+ of courses. PhD enrollment growing. Alumni and industry engagement formalized.</div>
+      </div>
+      <div class="narr-connector">▶</div>
+      <div class="narr-phase narr-p3">
+        <div class="narr-phase-head">
+          <div class="narr-phase-yr">Years 4–5</div>
+          <div class="narr-phase-lbl">Scale &amp; Sustain</div>
+        </div>
+        <div class="narr-phase-body">≥2 online programs at scale generating revenue. 75%+ of graduates with a HIP. Rankings improving toward top 50. Signature programs (FFL, Laureate, Seminar) self-sustaining. ECE a net contributor to CECS performance-funding.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key commitments summary -->
+  <div class="commit-grid">
+    <div class="commit-card commit-p1">
+      <div class="commit-num">14</div>
+      <div class="commit-label">P1 Strategies</div>
+      <div class="commit-sub">across online, AI curriculum, HIPs, and industry credentials</div>
+    </div>
+    <div class="commit-card commit-p2">
+      <div class="commit-num">7</div>
+      <div class="commit-label">P2 Strategies</div>
+      <div class="commit-sub">lab modernization, commercialization pipeline, PhD growth</div>
+    </div>
+    <div class="commit-card commit-p3">
+      <div class="commit-num">8</div>
+      <div class="commit-label">P3 Strategies</div>
+      <div class="commit-sub">recognition culture, alumni network, faculty satisfaction</div>
+    </div>
+    <div class="commit-card commit-p4">
+      <div class="commit-num">6</div>
+      <div class="commit-label">P4 Strategies</div>
+      <div class="commit-sub">rankings, revenue programs, signature differentiators</div>
+    </div>
+    <div class="commit-card commit-ucf">
+      <div class="commit-num">21</div>
+      <div class="commit-label">UCF Metrics Addressed</div>
+      <div class="commit-sub">across all four UCF Unleashing Potential priority areas</div>
+    </div>
+    <div class="commit-card commit-ucf">
+      <div class="commit-num">31</div>
+      <div class="commit-label">Total Strategies</div>
+      <div class="commit-sub">each with Year 1, Year 3, and Year 5 measurable targets</div>
+    </div>
+  </div>
+</div>
+
+<!-- §1 OVERVIEW -->
+<div class="sec sa" id="overview">
+  <div class="sh"><span class="sn">§1</span><h2 class="st2">Department Overview</h2></div>
+  <div class="sg">
+    <div class="sc"><div class="sv">~2,000</div><div class="sl2">Undergraduate students (EE &amp; CpE)</div></div>
+    <div class="sc"><div class="sv">~350</div><div class="sl2">Graduate students</div></div>
+    <div class="sc"><div class="sv">47</div><div class="sl2">Tenure / tenure-earning faculty</div></div>
+    <div class="sc"><div class="sv">9+1</div><div class="sl2">Lecturers + Professor of Practice</div></div>
+    <div class="sc"><div class="sv">#50 CpE · #53 EE</div><div class="sl2">USNWR Graduate Rankings</div></div>
+    <div class="sc"><div class="sv">1 NAE · 15 IEEE</div><div class="sl2">Fellows (+ 5 NAI, 5 AAAS, 8 early-career)</div></div>
+  </div>
+  <div class="gb"><strong>Distinction:</strong> Faculty include a member of the National Academy of Engineering, 15 IEEE Fellows, 5 NAI Fellows, 5 AAAS Fellows, and 8 early-career awardees (NSF CAREER, DoE YI). Home to the <strong>Future Faculty Laureate (FFL) program</strong>, endorsed as a CECS-wide model.</div>
+  <p style="font-size:12px;color:var(--mid);margin-bottom:8px"><strong style="color:var(--ink)">Industry &amp; lab partnerships:</strong></p>
+  <div class="ptags"><span class="ptag">L3Harris</span><span class="ptag">Lockheed Martin</span><span class="ptag">Northrop Grumman</span><span class="ptag">Leidos</span><span class="ptag">AMD</span><span class="ptag">Intel</span><span class="ptag">Texas Instruments</span><span class="ptag">INL</span><span class="ptag">Sandia NL</span><span class="ptag">NAVWAR</span></div>
+</div>
+
+<!-- §2 MISSION -->
+<div class="sec sa" id="mission">
+  <div class="sh"><span class="sn">§2</span><h2 class="st2">Mission &amp; Vision</h2></div>
+  <div class="mg2">
+    <div class="mc"><div class="mcl">Vision</div><p class="mct">To be a nationally recognized department that produces technically excellent, professionally adaptable engineers while advancing knowledge across the full spectrum of electrical and computer engineering—celebrated for the quality of its graduates, the impact of its research, and the innovative programs that distinguish it from peer institutions.</p></div>
+    <div class="mc"><div class="mcl">Mission</div><p class="mct" style="font-size:12px">ECE advances its mission by: (1) delivering a rigorous, industry-aligned curriculum that evolves with technological change; (2) preparing graduates for workforce impact through experiential learning, online education, and HIPs; (3) conducting research that generates knowledge, IP, and commercial value; (4) cultivating a culture that recognizes excellence in teaching, research, service, and entrepreneurship; and (5) sustaining partnerships with industry, alumni, defense agencies, and national laboratories.</p></div>
+  </div>
+</div>
+
+<!-- §3 UCF ALIGNMENT -->
+<div class="sec sa" id="ucfalign">
+  <div class="sh"><span class="sn">§3</span><h2 class="st2">UCF Strategic Alignment</h2></div>
+  <p style="font-size:12px;color:var(--mid);margin-bottom:13px">All ECE strategies are tagged to UCF <em>Unleashing Potential</em> performance metrics (P-codes) and focus areas (F-codes), which drive the visualizations in §4.</p>
+  <div class="mg3">
+    <div class="mgc">
+      <div class="mgt mgt-1">P-1 · Student Success &amp; Well-Being</div>
+      <div class="mi">P-1A: FTIC Freshmen Retention</div><div class="mi">P-1B: FTIC 4-yr Graduation Rate</div>
+      <div class="mi">P-1C: FTIC 6-yr Graduation Rate</div><div class="mi">P-1D: Pell Recipient 6-yr Grad Rate</div>
+      <div class="mi">P-1F: % UG with ≥1 High-Impact Practice</div><div class="mi">P-1G: Undergraduate Class Size Index</div>
+      <div class="mi">P-1H: % Graduates Enrolled or Employed</div>
+    </div>
+    <div class="mgc">
+      <div class="mgt mgt-2">P-2 · Discovery &amp; Exploration</div>
+      <div class="mi">P-2A: R&amp;D Expenditures</div><div class="mi">P-2B: Patents Awarded Annually</div>
+      <div class="mi">P-2C: Licenses and Options Executed</div><div class="mi">P-2D: Start-up Companies Created</div>
+      <div class="mi">P-2E: Faculty FTE</div><div class="mi">P-2F: Post-doctoral Appointments</div>
+      <div class="mgt mgt-3" style="margin-top:12px">P-3 · Community &amp; Culture</div>
+      <div class="mi">P-3A: National Academy Members</div><div class="mi">P-3B: Faculty/Staff/Student Satisfaction</div>
+      <div class="mi">P-3C: Community Engagement</div><div class="mi">P-3D: Alumni Participation Rate</div>
+      <div class="mi">P-3E: Pegasus Partnerships</div>
+    </div>
+    <div class="mgc" style="grid-column:1/-1">
+      <div class="mgt mgt-4">P-4 · Innovation &amp; Sustainability</div>
+      <div style="display:flex;gap:22px;flex-wrap:wrap">
+        <div class="mi">P-4A: Annual Fundraising</div><div class="mi">P-4B: Endowment Value</div><div class="mi">P-4D: USNWR Peer Evaluation Rating</div>
+      </div>
+      <div style="margin-top:10px">
+        <div class="mgt" style="border-bottom:2px solid var(--ink);color:var(--ink);margin-bottom:7px">Focus Areas (F-codes)</div>
+        <div class="fprow"><span class="fp2">F-1 Space Tech &amp; Systems</span><span class="fp2">F-2 Entertainment &amp; Immersive</span><span class="fp2">F-3 Health &amp; Human Performance</span><span class="fp2">F-4 Energy &amp; Sustainability</span><span class="fp2">F-5 Transformative Tech &amp; Natl Security</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- §4 VIZ -->
+<div class="sec sa" id="vizsec">
+  <div class="sh"><span class="sn">§4</span><h2 class="st2">Strategy Map &amp; Alignment</h2></div>
+  <p style="font-size:12px;color:var(--mid);margin-bottom:16px">Three lenses on the plan's structure: metric alignment, coverage intensity, and the interconnection network between goals. Click any cell, bar, focus card, or network node to filter strategies.</p>
+  <div class="vt-row">
+    <div class="vt on" onclick="svt(0)">Alignment Matrix</div>
+    <div class="vt" onclick="svt(1)">Coverage &amp; Focus</div>
+    <div class="vt" onclick="svt(2)">Goal Network</div>
+  </div>
+  <div class="vp on" id="vp0">
+    <p class="vn">Rows = ECE goals · Columns = UCF metrics · Cell = strategy count · Gold = cross-priority metric. Click to filter.</p>
+    <div class="vc" id="matWrap"><svg id="matSvg"></svg></div>
+  </div>
+  <div class="vp" id="vp1">
+    <p class="vn">Strategy count per UCF metric (bars) and focus area (cards). Click to filter.</p>
+    <div class="vc">
+      <div class="cleg">
+        <div class="cld"><div class="cldd" style="background:var(--p1)"></div>P-1</div>
+        <div class="cld"><div class="cldd" style="background:var(--p2)"></div>P-2</div>
+        <div class="cld"><div class="cldd" style="background:var(--p3)"></div>P-3</div>
+        <div class="cld"><div class="cldd" style="background:var(--p4)"></div>P-4</div>
+      </div>
+      <div style="padding:0 16px" id="covBars"></div>
+      <div class="csl">UCF Focus Area — Strategy Count</div>
+      <div class="cfg" id="covFocus"></div>
+    </div>
+  </div>
+  <div class="vp" id="vp2">
+    <p class="vn">Nodes = ECE goals sized by strategy count. Solid edges = same-priority · Dashed gold = cross-priority metric overlap. Click a node to filter and highlight connections.</p>
+    <div class="vc" id="netWrap">
+      <svg id="netSvg" width="100%" height="460"></svg>
+      <div class="nleg">
+        <div class="nl"><div class="nlc" style="background:var(--p1)"></div>P1</div>
+        <div class="nl"><div class="nlc" style="background:var(--p2)"></div>P2</div>
+        <div class="nl"><div class="nlc" style="background:var(--p3)"></div>P3</div>
+        <div class="nl"><div class="nlc" style="background:var(--p4)"></div>P4</div>
+        <div class="nl"><div style="width:16px;height:1px;background:#CCC"></div>Same-priority</div>
+        <div class="nl"><div style="width:16px;height:0;border-top:1.5px dashed #C8A000"></div>Cross-priority</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STRATEGIES (JS-generated) -->
+<div id="sroot"></div>
+
+<!-- §9 RESOURCES -->
+<div class="sec sa" id="resources">
+  <div class="sh"><span class="sn">§9</span><h2 class="st2">Resources &amp; Acquisition</h2></div>
+  <div class="r2">
+    <div>
+      <div class="rct">Existing Resources &amp; Opportunities</div>
+      <div class="ri"><span class="ra">→</span>Strong enrollment generating tuition-based resources</div>
+      <div class="ri"><span class="ra">→</span>Nationally competitive faculty with active NSF, DoD, DOE, and industry funding</div>
+      <div class="ri"><span class="ra">→</span>Geographic advantage: defense/aerospace corridor (L3Harris, Lockheed, Northrop, NAVWAR)</div>
+      <div class="ri"><span class="ra">→</span>Existing online infrastructure extensible to new tracks; institutional revenue-sharing support</div>
+      <div class="ri"><span class="ra">→</span>Faculty with joint appointments at INL and interdisciplinary cluster affiliations</div>
+      <div class="ri"><span class="ra">→</span>UCF semiconductor initiative and CHIPS Act national momentum</div>
+      <div class="ri"><span class="ra">→</span>AI-for-ECE committee with chair support and incentivized adoption budget</div>
+      <div class="ri"><span class="ra">→</span>FFL program with explicit Dean endorsement as replicable model</div>
+      <div class="ri"><span class="ra">→</span>Established CDL and CCIE/STE connections for faculty certification</div>
+      <div class="ri"><span class="ra">→</span>Active faculty outreach through LIFE@UCF and community channels</div>
+      <div class="ri"><span class="ra">→</span>Student chapter infrastructure available for reactivation</div>
+    </div>
+    <div>
+      <div class="rct">Additional Resources Needed</div>
+      <div class="ri"><span class="ra">→</span>≥1 dedicated AI/IT support staff for digital infrastructure and lab platforms</div>
+      <div class="ri"><span class="ra">→</span>≥20 ULA positions to support faculty AI-integration efforts</div>
+      <div class="ri"><span class="ra">→</span>Faculty training/workshop budget: 2–3 domain-specific workshops/year</div>
+      <div class="ri"><span class="ra">→</span>Flexible learning infrastructure: digital-twin, remote-lab HIL, AR/VR, vendor partnerships</div>
+      <div class="ri"><span class="ra">→</span>3–5 additional tenure-track faculty lines over 5 years</div>
+      <div class="ri"><span class="ra">→</span>Increased GTA/GRA lines for PhD enrollment growth and teaching</div>
+      <div class="ri"><span class="ra">→</span>Lab modernization funding ($500K–$1M over 5 years)</div>
+      <div class="ri"><span class="ra">→</span>Additional research and teaching space (formal space-needs analysis)</div>
+      <div class="ri"><span class="ra">→</span>Student chapter support: ~$10K–$15K/year for conference travel</div>
+      <div class="ri"><span class="ra">→</span>Entrepreneurship Laureate seed funding: stipends, pitch prizes, fees</div>
+      <div class="ri"><span class="ra">→</span>EDA license expansion and shared GPU cluster or cloud allocation</div>
+    </div>
+  </div>
+  <h3 style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:12px">Resource Acquisition Channels</h3>
+  <div class="ag">
+    <div class="ac"><div class="ai">🏛️</div><div class="at">External Grants</div><div class="ad">NSF (MRI, CCRI), DoD (DURIP), DOE for equipment and infrastructure. UCF internal faculty development grants.</div></div>
+    <div class="ac"><div class="ai">🤝</div><div class="at">Industry Partnerships</div><div class="ad">Lab sponsorships, equipment donations, and capstone funding from IAB partners. ECE offerings packaged for CECS Pegasus Partnerships.</div></div>
+    <div class="ac"><div class="ai">🏫</div><div class="at">CECS &amp; UCF Investment</div><div class="ad">Data-driven cases for faculty lines, space, staff, and ULAs aligned with college plan and performance-funding data.</div></div>
+    <div class="ac"><div class="ai">💛</div><div class="at">Philanthropy</div><div class="ad">Named scholarships, lab naming, equipment donations—coordinated with UCF Advancement.</div></div>
+    <div class="ac"><div class="ai">🚀</div><div class="at">Entrepreneurship Ecosystem</div><div class="ad">Seed funding via departmental allocation, chair discretionary funds, UCF Incubator, NSF I-Corps, and UCF Business School competitions.</div></div>
+  </div>
+</div>
+
+<div class="ft">
+  <span>ECE STRATEGIC PLAN 2027–2032 · DRAFT v0.5 · UCF CECS</span>
+  <span>Chair: A. Vosoughi · Co-Chair: M. Borowczak · A. Behal · I. Batarseh · C.Y. Chan · R. DeMara · Y. Fallah · H. Kamali · T. Nghiem · M. Rakhshan · J. Wang</span>
+</div>
+</main>
+</div>
+<script>
+// ── DATA ─────────────────────────────────────────────────────────────
+const PRS=[
+  {id:'P1',lbl:'Priority 1',title:'Student Success &amp; Well-Being',cls:'ph-p1',col:'#1E4D8C',sec:5},
+  {id:'P2',lbl:'Priority 2',title:'Discovery &amp; Exploration',cls:'ph-p2',col:'#1A6B3C',sec:6},
+  {id:'P3',lbl:'Priority 3',title:'Community &amp; Culture',cls:'ph-p3',col:'#7A2D7E',sec:7},
+  {id:'P4',lbl:'Priority 4',title:'Innovation &amp; Sustainability',cls:'ph-p4',col:'#B85C00',sec:8}
+];
+const GLS=[
+  {id:'P1G1',pid:'P1',code:'P1.G1',title:'Build Scalable, Flexible Learning Environments with Hardware Differentiation'},
+  {id:'P1G2',pid:'P1',code:'P1.G2',title:'Prepare Students and Faculty for the Exponential Technology Curve'},
+  {id:'P1G3',pid:'P1',code:'P1.G3',title:'Close the Industry\u2013Curriculum Gap Through Evidence-Based Program Evolution'},
+  {id:'P2G1',pid:'P2',code:'P2.G1',title:'Grow and Revamp Research and Teaching Laboratories'},
+  {id:'P2G2',pid:'P2',code:'P2.G2',title:'Develop a Research-to-Commercialization Pipeline Through Student Entrepreneurship'},
+  {id:'P2G3',pid:'P2',code:'P2.G3',title:'Grow PhD Enrollment and Research Workforce'},
+  {id:'P3G1',pid:'P3',code:'P3.G1',title:'Celebrate Excellence\u2014Recognize High-Impact Achievements at Every Level'},
+  {id:'P3G2',pid:'P3',code:'P3.G2',title:'Deepen Alumni, Industry, and Community Engagement'},
+  {id:'P3G3',pid:'P3',code:'P3.G3',title:'Foster an Inclusive, Supportive Department Culture'},
+  {id:'P4G1',pid:'P4',code:'P4.G1',title:'Advance ECE\u2019s National Ranking and Align with Performance-Funding Metrics'},
+  {id:'P4G2',pid:'P4',code:'P4.G2',title:'Develop Programs and Offerings That Position ECE for Growth'},
+  {id:'P4G3',pid:'P4',code:'P4.G3',title:'Develop Signature Programs That Differentiate ECE'}
+];
+const BDGS={
+  'P1G3':[{g:'P3G2',r:'IAB links curriculum review to alumni &amp; industry engagement (P-3B, P-3C)'}],
+  'P2G1':[{g:'P1G3',r:'Lab revamp (S3) references P-1F, connecting hardware curriculum to HIP outcomes'}],
+  'P2G3':[{g:'P3G3',r:'PhD student growth shares P-2E metric with early-career faculty mentoring'}],
+  'P3G3':[{g:'P2G3',r:'Early-career faculty mentoring (P-2E) ties faculty health to PhD pipeline growth'}],
+  'P4G1':[{g:'P1G1',r:'P4.G1.S2 maps rankings to retention &amp; graduation metrics (P-1A, P-1B, P-1D)'}],
+  'P4G3':[{g:'P2G2',r:'FFL and Entrepreneurship Laureate are paired signature Laureate programs'},{g:'P3G2',r:'FFL PhD-to-faculty tracking feeds directly into alumni engagement pipeline'}]
+};
+const SS=[
+  {id:'P1G1S1',gid:'P1G1',pid:'P1',code:'P1.G1.S1',
+   desc:'Expand mixed-mode and fully online offerings, starting with the Robotics &amp; Autonomous Systems MS and NASA Parts Certificate Program. Scalable asynchronous model with automated assessment.',
+   pc:['P-1H','P-1G'],fc:['F-1','F-5'],
+   y1:'Identify 1\u20132 lead programs; audit existing DL models; begin faculty certification pipeline',
+   y3:'1 online MS launched; 50+ students enrolled; automated assessment for core courses',
+   y5:'\u22652 online programs generating net-new revenue; 150+ students; revenue reinvested in GTAs/GRAs, staff, equipment'},
+  {id:'P1G1S2',gid:'P1G1',pid:'P1',code:'P1.G1.S2',
+   desc:'Scalable remote-access infrastructure for hardware-intensive courses: digital twins, remote labs (hardware-in-the-loop), and AR/VR simulations.',
+   pc:['P-1F','P-1H'],fc:['F-1','F-4','F-5'],
+   y1:'Identify top-3 lab courses; assess digital-twin, remote-lab, AR/VR options; secure seed funding or equipment partnership',
+   y3:'Flexible-access infrastructure for \u22653 lab courses; concurrent-user scalability demonstrated; satisfaction surveyed',
+   y5:'All core lab sequences accessible via remote infrastructure; flexible modalities embedded as departmental strength'},
+  {id:'P1G1S3',gid:'P1G1',pid:'P1',code:'P1.G1.S3',
+   desc:'Build the faculty pipeline for online delivery through training, certification, and procedural support via UCF CDL and CCIE/STE.',
+   pc:['P-1G'],fc:['F-5'],
+   y1:'Partner with UCF CDL and CCIE/STE; enroll \u22655 faculty in certification; document procedures',
+   y3:'50%+ of target-program faculty certified; completion and approval rates tracked as KPIs',
+   y5:'Online faculty certification embedded as departmental norm; new courses launch within one semester of proposal'},
+  {id:'P1G2S1',gid:'P1G2',pid:'P1',code:'P1.G2.S1',
+   desc:'Streamline AI integration across the curriculum through a closed-loop cycle (Implement \u2192 Assess \u2192 Revise) for the \u201cECE 2030 curriculum.\u201d Faculty incentivized\u2014not mandated\u2014with ULA support and training workshops.',
+   pc:['P-1B','P-1C'],fc:['F-5'],
+   y1:'Reconvene Future Curriculum committee; define tiered buy-in; pilot in 3\u20135 courses; host 2\u20133 faculty workshops',
+   y3:'30%+ of courses with documented AI integration; assessment data published; training rate tracked as KPI',
+   y5:'60%+ courses using AI-enhanced pedagogy; documented improvement in learning outcomes; ECE model shared externally'},
+  {id:'P1G2S2',gid:'P1G2',pid:'P1',code:'P1.G2.S2',
+   desc:'Develop student critical-thinking and lifelong-learning skills alongside instructor competencies for evaluating AI-generated solutions, through progressive assignments and continuous faculty skill development.',
+   pc:['P-1H'],fc:['F-5'],
+   y1:'Identify target courses; develop 2\u20133 assignment models (comparison projects); pilot; continuous faculty training',
+   y3:'Critical lifelong-skills-for-AI assignments in \u22655 courses; student AI-literacy assessed via common rubric',
+   y5:'Critical-thinking capacity embedded as program-level learning outcome; graduates demonstrate AI evaluation skills valued by industry'},
+  {id:'P1G3S1',gid:'P1G3',pid:'P1',code:'P1.G3.S1',
+   desc:'Maintain the standing ECE Industry Advisory Board (IAB) for annual curriculum reviews and gap analyses driving course revisions and new credentials.',
+   pc:['P-1H'],fc:['F-5'],
+   y1:'Conduct gap-analysis survey; identify top-3 skill gaps',
+   y3:'\u22654 core/elective courses revised based on IAB data; 1 new certificate launched',
+   y5:'Sustained annual cycle; \u22652 new certificates or micro-credentials; 90%+ employer satisfaction'},
+  {id:'P1G3S2',gid:'P1G3',pid:'P1',code:'P1.G3.S2',
+   desc:'Develop new programs and certificates in high-demand areas: Semiconductor Manufacturing, Hardware Security, Robotics &amp; Autonomous Systems, AI-for-EE.',
+   pc:['P-1H'],fc:['F-1','F-5'],
+   y1:'Submit 1 new certificate proposal; begin MS track feasibility study',
+   y3:'Launch 1 new MS track; submit BS degree proposal if demand warrants',
+   y5:'\u22652 new certificates operational; \u22651 new degree/track with 50+ enrolled students'},
+  {id:'P1G3S3',gid:'P1G3',pid:'P1',code:'P1.G3.S3',
+   desc:'Increase the percentage of ECE undergraduates completing at least one High-Impact Practice (HIP) by graduation: undergraduate research, internships/co-ops, industry-sponsored capstones, service learning.',
+   pc:['P-1F','P-1H'],fc:['F-5'],
+   y1:'Baseline current HIP participation; formalize internship-for-credit pathway; identify untracked HIP-qualifying experiences',
+   y3:'HIP participation rate +15 pp; 10+ industry-sponsored capstones/year; internship-for-credit doubled',
+   y5:'\u226575% of ECE graduates with at least one documented HIP; capstone sponsorship self-sustaining'},
+  {id:'P1G3S4',gid:'P1G3',pid:'P1',code:'P1.G3.S4',
+   desc:'Charter, reactivate, and grow student chapters of professional organizations (IEEE, ACM, HKN, SWE, SHPE, NSBE) as community infrastructure and HIP pathways.',
+   pc:['P-1F','P-3B','P-3C'],fc:['F-5'],
+   y1:'Audit chapter status; reactivate or charter \u22653 chapters; assign faculty advisors; secure baseline funding',
+   y3:'\u22655 active chapters; annual conference delegation for \u22652 chapters; chapter events in ECE calendar',
+   y5:'Self-sustaining chapter ecosystem with industry sponsorship; activity at or above peer-institution levels'},
+  {id:'P2G1S1',gid:'P2G1',pid:'P2',code:'P2.G1.S1',
+   desc:'Conduct a comprehensive lab audit of equipment, digital infrastructure, and deferred-maintenance needs; develop a phased modernization plan covering physical labs and computing/EDA/cloud resources.',
+   pc:['P-2A'],fc:['F-1','F-4','F-5'],
+   y1:'Document current lab baseline; produce prioritized modernization roadmap; identify 3 high-impact upgrades; secure 1 computing/cloud grant or donation',
+   y3:'Phase 1 upgrades complete ($250K\u2013$500K via grants/donations/college); 2 new shared-use labs; shared computing cluster operational',
+   y5:'All teaching labs on \u22645-yr refresh cycle; digital infrastructure on par with peer top-50 ECE departments'},
+  {id:'P2G1S2',gid:'P2G1',pid:'P2',code:'P2.G1.S2',
+   desc:'Establish new research lab capacity in emerging focus areas: AI/ML hardware, semiconductor process, hardware security, power electronics, and robotics.',
+   pc:['P-2A'],fc:['F-1','F-3','F-4','F-5'],
+   y1:'Identify space needs; submit 1\u20132 equipment grant proposals (MRI, DURIP); seed 1 new lab',
+   y3:'2\u20133 new/expanded research labs; $1M+ in external equipment funding secured',
+   y5:'ECE lab footprint expanded 15%+; new labs generating publications, patents, and sponsored projects'},
+  {id:'P2G1S3',gid:'P2G1',pid:'P2',code:'P2.G1.S3',
+   desc:'Revamp senior-design and lab sequences to reflect current industry tools: modern EDA, FPGA platforms, embedded ML kits, AI stacks, and AI-assisted design tools.',
+   pc:['P-1F','P-2A'],fc:['F-5'],
+   y1:'Pilot updated lab content in 2 courses; establish tool/license partnerships (Cadence, Synopsys, AMD/Xilinx, Nvidia)',
+   y3:'50%+ of lab courses updated; student satisfaction with lab experience surveyed',
+   y5:'All lab-based courses on continuous-improvement cycle aligned with IAB feedback'},
+  {id:'P2G2S1',gid:'P2G2',pid:'P2',code:'P2.G2.S1',
+   desc:'Launch an ECE Entrepreneurship Laureate program (modeled on FFL) for PhD students pursuing startup and commercialization pathways. Faculty/alumni mentorship, business-school coursework, VC engagement, UCF Incubator, and I-Corps pathways.',
+   pc:['P-2D'],fc:['F-5'],
+   y1:'Design program with faculty leads; recruit inaugural cohort of 3\u20135 PhD students; establish mentor pool; connect with UCF Business School',
+   y3:'10+ students in pipeline; 1\u20132 teams in pitch competitions; VC engagement events hosted',
+   y5:'Self-sustaining program with annual cohorts; \u22651 startup or commercialization per year; recognized alongside FFL'},
+  {id:'P2G2S2',gid:'P2G2',pid:'P2',code:'P2.G2.S2',
+   desc:'Increase per-faculty research expenditures through targeted proposal support, multi-PI collaborations, and center-level grants.',
+   pc:['P-2A'],fc:['F-1','F-4','F-5'],
+   y1:'Baseline per-faculty expenditures; host 2 grant-writing workshops; identify 3 multi-PI targets',
+   y3:'Per-faculty expenditures +15%; 2+ multi-PI center proposals submitted',
+   y5:'Per-faculty expenditures +30%; ECE contributing proportionally to CECS $150M target'},
+  {id:'P2G2S3',gid:'P2G2',pid:'P2',code:'P2.G2.S3',
+   desc:'Grow patents, invention disclosures, and industry-sponsored research.',
+   pc:['P-2B','P-2C'],fc:['F-5'],
+   y1:'Baseline IP portfolio; host invention-disclosure workshop',
+   y3:'Patent filings +25%; 2+ industry research agreements',
+   y5:'+50% patent filings; \u22651 startup or license; industry research \u226520% of portfolio'},
+  {id:'P2G3S1',gid:'P2G3',pid:'P2',code:'P2.G3.S1',
+   desc:'Increase funded RA/TA lines and international PhD recruiting.',
+   pc:['P-2E','P-2F'],fc:['F-5'],
+   y1:'Baseline PhD enrollment; recruit 5+ above current cohort',
+   y3:'PhD-to-faculty ratio \u22654:1; 1\u20132 postdocs',
+   y5:'\u22655:1 ratio; postdoc pipeline; placements at peers, labs, industry'},
+  {id:'P3G1S1',gid:'P3G1',pid:'P3',code:'P3.G1.S1',
+   desc:'Create formal ECE awards for outstanding faculty (teaching, research, service), students (UG research, graduate excellence), and alumni. Ensure major achievements receive visible departmental celebration.',
+   pc:['P-3A','P-3B'],fc:[],
+   y1:'Define award categories, criteria, and selection process; launch inaugural awards cycle; celebrate 2\u20133 high-impact achievements',
+   y3:'Annual awards ceremony established; 3+ categories; nominations integrated with CECS/UCF pipeline',
+   y5:'ECE awards recognized externally; at least 2 ECE nominees/year for CECS/UCF-level honors'},
+  {id:'P3G1S2',gid:'P3G1',pid:'P3',code:'P3.G1.S2',
+   desc:'Host an annual ECE community event bringing together students, faculty, staff, alumni, and industry partners.',
+   pc:['P-3B','P-3C'],fc:[],
+   y1:'Organize inaugural ECE celebration; target 100+ attendees',
+   y3:'Annual event with 200+ attendees; corporate sponsorship offsetting costs',
+   y5:'Signature ECE event; integrated into alumni homecoming and E-Week'},
+  {id:'P3G2S1',gid:'P3G2',pid:'P3',code:'P3.G2.S1',
+   desc:'Grow ECE alumni network through targeted outreach, LinkedIn presence, alumni mentoring, and tracking of PhD graduates who become faculty (FFL pipeline metric).',
+   pc:['P-3D'],fc:[],
+   y1:'Audit current alumni engagement; recruit 10 mentors; build PhD-to-faculty tracking database',
+   y3:'200+ engaged alumni; 25+ active mentors; PhD-to-faculty placement data published',
+   y5:'500+ active alumni; alumni embedded as IAB members, capstone judges, and seminar speakers'},
+  {id:'P3G2S2',gid:'P3G2',pid:'P3',code:'P3.G2.S2',
+   desc:'Package ECE-specific engagement offerings (capstone sponsorship, lab access, guest lectures, research collaboration) for CECS Pegasus Partnership proposals.',
+   pc:['P-3E'],fc:['F-5'],
+   y1:'Identify 2 industry partners with existing ECE ties; develop ECE engagement menu for CECS',
+   y3:'ECE engagement menu in active use by CECS; contributions embedded in 1\u20132 partnership proposals',
+   y5:'ECE recognized as key contributor to CECS partnership portfolio; engagement self-sustaining'},
+  {id:'P3G2S3',gid:'P3G2',pid:'P3',code:'P3.G2.S3',
+   desc:'Formalize broader community engagement through public-facing programming, applied research participation, and media presence. Leverage LIFE@UCF, focus groups, field trials, and media interviews.',
+   pc:['P-3B','P-3C'],fc:['F-5'],
+   y1:'Inventory current engagement; identify 3\u20135 active faculty; establish annual P-3C reporting; schedule \u22652 ECE presentations through LIFE@UCF',
+   y3:'\u22655 community-facing events/year; faculty media mentions tracked; community partners invited to \u22651 capstone showcase',
+   y5:'Community engagement embedded in ECE identity &amp; recruitment narrative; community partners contributing as evaluators and advisory participants'},
+  {id:'P3G3S1',gid:'P3G3',pid:'P3',code:'P3.G3.S1',
+   desc:'Improve faculty and staff satisfaction through transparent communication, social engagement, and streamlined administrative processes.',
+   pc:['P-3B'],fc:[],
+   y1:'Conduct baseline satisfaction survey; identify top-3 pain points; implement 1 process improvement',
+   y3:'Satisfaction scores +10%; 2+ social events/year beyond annual picnic',
+   y5:'Satisfaction scores above CECS median; ECE culture cited as strength in hiring'},
+  {id:'P3G3S2',gid:'P3G3',pid:'P3',code:'P3.G3.S2',
+   desc:'Support early-career faculty through structured mentoring and champion accelerated tenure for exceptional performers.',
+   pc:['P-3B','P-2E'],fc:[],
+   y1:'Assign mentors to all pre-tenure faculty; document expectations; clarify accelerated-tenure pathways',
+   y3:'100% of junior faculty with active mentors; \u22651 faculty considered for early tenure if warranted',
+   y5:'Tenure success rate \u226590%; accelerated tenure recognized as departmental norm for exceptional cases'},
+  {id:'P3G3S3',gid:'P3G3',pid:'P3',code:'P3.G3.S3',
+   desc:'Formalize department-wide equipment and resource sharing, building on the existing cluster model.',
+   pc:['P-3B','P-3C'],fc:[],
+   y1:'Establish equipment committee; document cluster practices as exemplar; establish department-wide inventory protocol; pilot with 1\u20132 clusters',
+   y3:'Department-wide redistribution protocol operational; resources recaptured from faculty departures',
+   y5:'Shared equipment as department norm; annual inventory published; shared pools for major clusters'},
+  {id:'P3G3S4',gid:'P3G3',pid:'P3',code:'P3.G3.S4',
+   desc:'Strengthen graduate student engagement: recurring Open Forums (1/semester) with anonymous feedback, PhD lunch series for cross-lab community building, and designated faculty liaisons for departmental advocacy and career guidance.',
+   pc:['P-3B','P-3C'],fc:['F-5'],
+   y1:'Host first Open Forum; establish anonymous feedback channel; launch PhD lunch series; formalize faculty liaison roles covering each research cluster',
+   y3:'Biannual forums with published action-item follow-through; monthly PhD lunches with rotating faculty hosts; liaison program covering all clusters',
+   y5:'Forum embedded in department governance; measurable improvement in graduate student satisfaction; model documented for CECS replication'},
+  {id:'P4G1S1',gid:'P4G1',pid:'P4',code:'P4.G1.S1',
+   desc:'Increase publications in top-tier venues (IEEE Transactions/Journals, flagship conferences) through faculty incentives and collaborative writing groups.',
+   pc:['P-4D'],fc:['F-1','F-5'],
+   y1:'Baseline top-tier publication count; form 2 writing groups; identify target venues per sub-area',
+   y3:'Top-tier publications +20%; 1+ faculty nominated for IEEE/society awards',
+   y5:'Top-tier publications +40%; ECE contributing to USNWR ranking improvement toward top 50'},
+  {id:'P4G1S2',gid:'P4G1',pid:'P4',code:'P4.G1.S2',
+   desc:'Map ECE strategic plan metrics to UCF performance-funding indicators (FTIC retention, 4-yr graduation, Pell graduation, employment) so ECE successes count at the state level.',
+   pc:['P-1A','P-1B','P-1D','P-4D'],fc:[],
+   y1:'Map each ECE strategy to specific performance-funding metrics; identify data sources; confirm with CECS',
+   y3:'ECE-level data flowing into college performance-funding reports; metrics tracked annually',
+   y5:'ECE recognized as strong contributor to UCF performance-funding outcomes; data pipeline self-sustaining'},
+  {id:'P4G2S1',gid:'P4G2',pid:'P4',code:'P4.G2.S1',
+   desc:'Develop professional education offerings and industry training partnerships (corporate short courses, continuing education, workforce certificates) that position ECE for revenue growth. Online degree programs are addressed under P1.G1.S1.',
+   pc:['P-4A'],fc:['F-5'],
+   y1:'Explore 1 corporate-training partnership; identify professional education demand from IAB; package proposals for CECS/Provost',
+   y3:'1 corporate-training pilot delivered; professional education revenue tracked; enrollment data reported to CECS',
+   y5:'Professional education portfolio established; ECE positioned as net contributor to CECS revenue targets; \u22652 recurring corporate partnerships'},
+  {id:'P4G2S2',gid:'P4G2',pid:'P4',code:'P4.G2.S2',
+   desc:'Identify and package ECE giving opportunities\u2014named scholarships, lab sponsorships, equipment donations\u2014and coordinate with UCF Advancement.',
+   pc:['P-4A','P-4B'],fc:[],
+   y1:'Develop ECE giving-opportunity menu; identify 5 prospects; share with UCF Advancement',
+   y3:'2+ prospects in active conversations managed by Advancement; 1 named scholarship or lab sponsorship secured',
+   y5:'Sustained pipeline of ECE prospects; giving opportunities featured in alumni and IAB interactions'},
+  {id:'P4G3S1',gid:'P4G3',pid:'P4',code:'P4.G3.S1',
+   desc:'Sustain and grow the Future Faculty Laureate (FFL) program, endorsed by the Dean for replication across CECS. Track PhD \u2192 Faculty pipeline as a key departmental metric.',
+   pc:['P-4D'],fc:[],
+   y1:'Continue FFL operations; build PhD-to-faculty placement database; recruit cohort of 10\u201315 students',
+   y3:'20+ students active; first FFL alumni tracked into faculty/postdoc positions; database published',
+   y5:'Self-sustaining pipeline; 50%+ of completers in academic or national-lab roles; replicated across CECS'},
+  {id:'P4G3S2',gid:'P4G3',pid:'P4',code:'P4.G3.S2',
+   desc:'Institute an ECE Graduate Seminar series covering professional development, research communication, and industry networking as a signature of the ECE graduate experience.',
+   pc:['P-4D','P-3B'],fc:[],
+   y1:'Launch biweekly seminar (Fall/Spring); 10+ sessions/year with faculty, alumni, and industry speakers',
+   y3:'Seminar attendance and satisfaction tracked; featured in recruitment materials',
+   y5:'Seminar embedded as an ECE signature; satisfaction \u226585%; recognized externally as differentiator'}
+];
+const METRICS=[
+  {id:'P-1A',lbl:'Retention',grp:'P-1',col:'#1E4D8C'},{id:'P-1B',lbl:'4-yr Grad',grp:'P-1',col:'#1E4D8C'},
+  {id:'P-1C',lbl:'6-yr Grad',grp:'P-1',col:'#1E4D8C'},{id:'P-1D',lbl:'Pell Grad',grp:'P-1',col:'#1E4D8C'},
+  {id:'P-1F',lbl:'HIP',grp:'P-1',col:'#1E4D8C'},{id:'P-1G',lbl:'ClassSz',grp:'P-1',col:'#1E4D8C'},
+  {id:'P-1H',lbl:'Employed',grp:'P-1',col:'#1E4D8C'},
+  {id:'P-2A',lbl:'R&D Exp',grp:'P-2',col:'#1A6B3C'},{id:'P-2B',lbl:'Patents',grp:'P-2',col:'#1A6B3C'},
+  {id:'P-2C',lbl:'Licenses',grp:'P-2',col:'#1A6B3C'},{id:'P-2D',lbl:'Startups',grp:'P-2',col:'#1A6B3C'},
+  {id:'P-2E',lbl:'FacFTE',grp:'P-2',col:'#1A6B3C'},{id:'P-2F',lbl:'Postdocs',grp:'P-2',col:'#1A6B3C'},
+  {id:'P-3A',lbl:'NatlAcad',grp:'P-3',col:'#7A2D7E'},{id:'P-3B',lbl:'Satisf.',grp:'P-3',col:'#7A2D7E'},
+  {id:'P-3C',lbl:'Commty',grp:'P-3',col:'#7A2D7E'},{id:'P-3D',lbl:'Alumni',grp:'P-3',col:'#7A2D7E'},
+  {id:'P-3E',lbl:'Pegasus',grp:'P-3',col:'#7A2D7E'},
+  {id:'P-4A',lbl:'Fundraise',grp:'P-4',col:'#B85C00'},{id:'P-4B',lbl:'Endowmt',grp:'P-4',col:'#B85C00'},
+  {id:'P-4D',lbl:'USNWR',grp:'P-4',col:'#B85C00'}
+];
+const FOCS=[
+  {id:'F-1',lbl:'Space Technologies &amp; Systems'},
+  {id:'F-2',lbl:'Entertainment &amp; Immersive'},
+  {id:'F-3',lbl:'Health &amp; Human Performance'},
+  {id:'F-4',lbl:'Energy &amp; Sustainability'},
+  {id:'F-5',lbl:'Transformative Tech &amp; Natl Security'}
+];
+const NET_EDGES=[
+  {s:'P1G1',t:'P1G2',ty:'same'},{s:'P1G2',t:'P1G3',ty:'same'},{s:'P1G1',t:'P1G3',ty:'same'},
+  {s:'P2G1',t:'P2G2',ty:'same'},{s:'P2G2',t:'P2G3',ty:'same'},{s:'P2G1',t:'P2G3',ty:'same'},
+  {s:'P3G1',t:'P3G2',ty:'same'},{s:'P3G2',t:'P3G3',ty:'same'},{s:'P3G1',t:'P3G3',ty:'same'},
+  {s:'P4G1',t:'P4G2',ty:'same'},{s:'P4G2',t:'P4G3',ty:'same'},{s:'P4G1',t:'P4G3',ty:'same'},
+  {s:'P1G3',t:'P3G2',ty:'cross'},{s:'P2G1',t:'P1G3',ty:'cross'},
+  {s:'P2G3',t:'P3G3',ty:'cross'},{s:'P4G1',t:'P1G1',ty:'cross'},
+  {s:'P4G3',t:'P2G2',ty:'cross'},{s:'P4G3',t:'P3G2',ty:'cross'},
+  {s:'P3G3',t:'P2G3',ty:'cross'},{s:'P4G3',t:'P3G3',ty:'cross'}
+];
+
+// ── STATE ──────────────────────────────────────────────────────────────
+const F={priority:null,fcode:null,pgroup:null};
+let activeNet=null;
+
+// ── STEPPER ────────────────────────────────────────────────────────────
+const STEPS=[
+  {id:'hero',lbl:'Intro',pc:'0'},{id:'overview',lbl:'Overview',pc:'0'},
+  {id:'mission',lbl:'Mission',pc:'0'},{id:'ucfalign',lbl:'UCF Align',pc:'0'},
+  {id:'walkthrough',lbl:'Guide',pc:'0'},
+  {id:'vizsec',lbl:'Map',pc:'0'},
+  {id:'p1',lbl:'P1',pc:'p1'},{id:'p2',lbl:'P2',pc:'p2'},
+  {id:'p3',lbl:'P3',pc:'p3'},{id:'p4',lbl:'P4',pc:'p4'},
+  {id:'resources',lbl:'Resources',pc:'0'}
+];
+function buildStepper(){
+  const el=document.getElementById('stp');
+  el.innerHTML=STEPS.map((s,i)=>`
+    <div class="st" id="st-${s.id}">
+      <div class="st-n" onclick="gt('${s.id}')">
+        <div class="st-c">${i+1}</div>
+        <div class="st-l">${s.lbl}</div>
+      </div>
+      ${i<STEPS.length-1?'<div class="st-line"></div>':''}
+    </div>`).join('');
+}
+function updateStepper(){
+  const off=52+46+80;
+  let cur=0;
+  STEPS.forEach((s,i)=>{
+    const el=document.getElementById(s.id);
+    if(el&&el.getBoundingClientRect().top<=off) cur=i;
+  });
+  STEPS.forEach((s,i)=>{
+    const el=document.getElementById('st-'+s.id);
+    if(!el) return;
+    el.className='st';
+    if(i<cur){el.classList.add('done');}
+    else if(i===cur){el.classList.add('cur','cur-'+s.pc);}
+  });
+}
+
+// ── STRATEGY DOM ────────────────────────────────────────────────────────
+function buildStrategies(){
+  let html='', secNum=5;
+  PRS.forEach(pr=>{
+    const pGls=GLS.filter(g=>g.pid===pr.id);
+    const pSS=SS.filter(s=>s.pid===pr.id);
+    html+=`<div class="pb sec sa" id="${pr.id.toLowerCase()}">
+      <div class="sh"><span class="sn">\u00a7${secNum}</span><h2 class="st2">${pr.lbl}: ${pr.title}</h2></div>
+      <div class="ph ${pr.cls} sa" id="${pr.id.toLowerCase()}-hdr">
+        <span class="pn">${pr.lbl}</span>
+        <span class="pt2">${pr.title}</span>
+        <span class="pmb" id="pmb-${pr.id}">All ${pSS.length} strategies</span>
+      </div>`;
+    pGls.forEach((g,gi)=>{
+      const gSS=SS.filter(s=>s.gid===g.id);
+      const isLast=gi===pGls.length-1;
+      html+=`<div class="go${isLast?' last':''} sa" id="${g.id.toLowerCase()}">
+        <div class="gh" onclick="tgGoal(this)">
+          <span class="gc2">${g.code}</span>
+          <span class="gt2">${g.title}</span>
+          <span class="gbdg" id="gbdg-${g.id}">${gSS.length} strategies</span>
+          <span class="gch">\u25b6</span>
+        </div>
+        <div class="gb2" id="gbody-${g.id}">
+          <div class="ge2" id="ge-${g.id}">No strategies match current filters</div>`;
+      gSS.forEach(s=>{
+        const pnum=parseInt(pr.id.substring(1));
+        const cxPc=s.pc.filter(p=>parseInt(p.split('-')[1])!==pnum);
+        html+=`<div class="scard" id="sc-${s.id}" data-pid="${s.pid}" data-pc="${s.pc.join(' ')}" data-fc="${s.fc.join(' ')}">
+          <div class="stop2">
+            <span class="scode">${s.code}</span>
+            <span class="sdesc">${s.desc}</span>
+          </div>
+          <div class="stags">
+            ${s.pc.map(p=>{
+              const cx=parseInt(p.split('-')[1])!==pnum;
+              return `<span class="stag${cx?' cx':''}" onclick="fByMetric('${p}')" title="Filter by ${p}">${p}</span>`;
+            }).join('')}
+            ${s.fc.map(f=>`<span class="stag" style="color:#8B6914;background:#FFF8D6;border:1px solid #C8AA44" onclick="fByFcode('${f}')" title="Filter by ${f}">${f}</span>`).join('')}
+          </div>
+          ${cxPc.length>0?`<div class="cxn">\u26a1 <strong>Cross-priority:</strong> ${cxPc.map(p=>`<span class="stag cx" style="cursor:default">${p}</span>`).join(' ')} — metric from outside ${pr.lbl}.</div>`:''}
+          <div class="tg">
+            <div class="tc"><div class="th2 tc1"><span class="td2 d1"></span>Year 1</div><div class="tt2">${s.y1}</div></div>
+            <div class="tc"><div class="th2 tc3"><span class="td2 d3"></span>Year 3</div><div class="tt2">${s.y3}</div></div>
+            <div class="tc"><div class="th2 tc5"><span class="td2 d5"></span>Year 5</div><div class="tt2">${s.y5}</div></div>
+          </div>
+        </div>`;
+      });
+      const bdgs=BDGS[g.id];
+      if(bdgs){
+        html+=`<div class="brd">
+          <div class="brd-t">\u21c4 Cross-Priority Connections</div>
+          <div class="brd-ls">
+            ${bdgs.map(b=>{
+              const tg=GLS.find(gg=>gg.id===b.g);
+              return `<span class="brd-l" onclick="gt('${b.g.toLowerCase()}')" title="${b.r}">\u2197 ${tg?tg.code:b.g}: ${b.r}</span>`;
+            }).join('')}
+          </div>
+        </div>`;
+      }
+      html+=`</div></div>`;
+    });
+    html+=`</div>`;
+    secNum++;
+  });
+  document.getElementById('sroot').innerHTML=html;
+}
+
+// ── FILTER MODE ────────────────────────────────────────────────────────
+let filterMode='dim'; // 'dim' | 'hide'
+function setMode(m){
+  filterMode=m;
+  document.getElementById('tgl-dim').classList.toggle('on',m==='dim');
+  document.getElementById('tgl-hide').classList.toggle('on',m==='hide');
+  if(F.priority||F.fcode||F.pgroup) applyF();
+}
+
+function tgF(el){
+  const ft=el.dataset.f, val=el.dataset.v;
+  el.closest('.fp-cs').querySelectorAll('.ck').forEach(c=>c.classList.remove('on'));
+  if(F[ft]===val){F[ft]=null;}else{F[ft]=val;el.classList.add('on');}
+  applyF();
+}
+function fByMetric(code){
+  const pg=code.substring(0,3);
+  F.pgroup=F.pgroup===pg?null:pg;
+  document.querySelectorAll('[data-f="pgroup"]').forEach(c=>c.classList.toggle('on',c.dataset.v===F.pgroup));
+  applyF();
+}
+function fByFcode(code){
+  F.fcode=F.fcode===code?null:code;
+  document.querySelectorAll('[data-f="fcode"]').forEach(c=>c.classList.toggle('on',c.dataset.v===F.fcode));
+  applyF();
+}
+function resetF(){
+  F.priority=null;F.fcode=null;F.pgroup=null;activeNet=null;
+  document.querySelectorAll('.ck').forEach(c=>c.classList.remove('on'));
+  applyF();
+  hlNet(null);
+}
+
+function applyF(){
+  const on=!!(F.priority||F.fcode||F.pgroup);
+  document.getElementById('fbtn').classList.toggle('on',on);
+
+  // Status bar and banner
+  const statusEl=document.getElementById('fp-status');
+  const banner=document.getElementById('filter-banner');
+  const rstBtn=document.getElementById('fp-rst-btn');
+  statusEl.classList.toggle('on',on);
+  banner.classList.toggle('on',on);
+  if(rstBtn) rstBtn.classList.toggle('on',on);
+
+  // Filter description label in banner
+  const descEl=document.getElementById('fb-filter-desc');
+  if(descEl){
+    const parts=[];
+    if(F.priority){ const pr=PRS.find(p=>p.id===F.priority); parts.push(pr?pr.lbl:F.priority); }
+    if(F.fcode) parts.push(F.fcode);
+    if(F.pgroup) parts.push('UCF '+F.pgroup);
+    descEl.textContent=parts.length?'Filter: '+parts.join(' + '):'';
+  }
+
+  // Helper: does a strategy pass current filters?
+  const passes=s=>{
+    if(!on) return true;
+    if(F.priority&&s.pid!==F.priority) return false;
+    if(F.fcode&&!s.fc.includes(F.fcode)) return false;
+    if(F.pgroup&&!s.pc.some(p=>p.startsWith(F.pgroup))) return false;
+    return true;
+  };
+
+  // Strategy-level
+  let visS=0;
+  SS.forEach(s=>{
+    const match=passes(s);
+    if(match) visS++;
+    const el=document.getElementById('sc-'+s.id);
+    if(!el) return;
+    el.classList.remove('f-match','f-dim','hid');
+    if(!on) return;
+    if(match){
+      el.classList.add('f-match');
+    } else {
+      if(filterMode==='hide') el.classList.add('hid');
+      else el.classList.add('f-dim');
+    }
+  });
+
+  // Goal-level
+  let visG=0;
+  GLS.forEach(g=>{
+    const gSS=SS.filter(s=>s.gid===g.id);
+    const vn=on ? gSS.filter(passes).length : gSS.length;
+    if(vn>0) visG++;
+
+    const bdg=document.getElementById('gbdg-'+g.id);
+    const ge=document.getElementById('ge-'+g.id);
+    const body=document.getElementById('gbody-'+g.id);
+    const hdr=body?body.previousElementSibling:null;
+    const goEl=hdr?hdr.closest('.go'):null;
+
+    if(bdg){
+      bdg.textContent=on?`${vn}\u2009/\u2009${gSS.length}`:gSS.length+' strategies';
+      bdg.classList.toggle('flt',on&&vn>0&&vn<gSS.length);
+    }
+    if(ge) ge.style.display=(on&&vn===0)?'block':'none';
+    if(on&&vn>0&&body&&!body.classList.contains('op')){
+      body.classList.add('op');if(hdr) hdr.classList.add('op');
+    }
+    if(goEl){
+      goEl.classList.remove('f-match','f-dim','f-hide');
+      if(on){
+        if(vn>0){ goEl.classList.add('f-match'); }
+        else {
+          if(filterMode==='hide') goEl.classList.add('f-hide');
+          else goEl.classList.add('f-dim');
+        }
+      }
+    }
+  });
+
+  // Priority-block level
+  let visP=0;
+  PRS.forEach(pr=>{
+    const pSS=SS.filter(s=>s.pid===pr.id);
+    const vn=on ? pSS.filter(passes).length : pSS.length;
+    if(vn>0) visP++;
+
+    const b=document.getElementById('pmb-'+pr.id);
+    if(b){
+      b.textContent=on?`${vn}\u2009/\u2009${pSS.length} strategies`:`All ${pSS.length} strategies`;
+      b.classList.toggle('on',on&&vn>0);
+    }
+    const pbEl=document.getElementById(pr.id.toLowerCase());
+    if(pbEl){
+      pbEl.classList.remove('f-match','f-dim','f-hide');
+      if(on){
+        if(vn>0){ pbEl.classList.add('f-match'); }
+        else {
+          if(filterMode==='hide') pbEl.classList.add('f-hide');
+          else pbEl.classList.add('f-dim');
+        }
+      }
+    }
+  });
+
+  // Update all six count displays (sidebar + banner) with a quick roll animation
+  function setCount(ids, val, cardId){
+    ids.forEach(id=>{
+      const el=document.getElementById(id);
+      if(!el) return;
+      const prev=parseInt(el.textContent)||0;
+      if(prev===val){return;}
+      el.style.transform='scale(1.4)';el.style.opacity='0.4';
+      setTimeout(()=>{
+        el.textContent=val;
+        el.style.transform='scale(1)';el.style.opacity='1';
+        el.style.transition='transform .2s ease,opacity .2s ease';
+      },80);
+    });
+    if(cardId){
+      const c=document.getElementById(cardId);
+      if(c) c.className='fp-stat-c '+(on?(val>0?'has-match':'no-match'):'');
+    }
+  }
+  setCount(['fsc-s-num','fb-s-num'], on?visS:31, 'fsc-s');
+  setCount(['fsc-g-num','fb-g-num'], on?visG:12, 'fsc-g');
+  setCount(['fsc-p-num','fb-p-num'], on?visP:4,  'fsc-p');
+
+  const mc=document.getElementById('mc');
+  if(mc) mc.textContent=on?visS:31;
+}
+function tgGoal(hdr){
+  const body=hdr.nextElementSibling;
+  const op=body.classList.contains('op');
+  hdr.classList.toggle('op',!op);body.classList.toggle('op',!op);
+}
+function tgFP(){
+  const p=document.getElementById('fpanel');
+  p.style.display=p.style.display==='none'?'':'none';
+}
+
+// ── MATRIX ─────────────────────────────────────────────────────────────
+function buildMatrix(){
+  const wrap=document.getElementById('matWrap');
+  const W=wrap.offsetWidth||740;
+  // topPad increased to 110 so rotated col headers never clip into row 1
+  const cellH=26,lw=72,topPad=110,leftPad=lw+6,cw=Math.max(16,Math.floor((W-leftPad-16)/METRICS.length));
+  const nR=GLS.length,nC=METRICS.length,H=topPad+nR*cellH+28;
+  const mat={};
+  GLS.forEach(g=>{mat[g.id]={};METRICS.forEach(m=>{mat[g.id][m.id]=SS.filter(s=>s.gid===g.id&&s.pc.includes(m.id)).length;});});
+  const maxV=Math.max(...GLS.flatMap(g=>METRICS.map(m=>mat[g.id][m.id])));
+  const svg=document.getElementById('matSvg');
+  svg.setAttribute('height',H);svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+  svg.innerHTML='';
+  const ns='http://www.w3.org/2000/svg';
+  const el=n=>document.createElementNS(ns,n);
+
+  // Full metric labels for tooltips
+  const MLBL={
+    'P-1A':'FTIC Freshmen Retention Rate',
+    'P-1B':'FTIC 4-yr Graduation Rate',
+    'P-1C':'FTIC 6-yr Graduation Rate',
+    'P-1D':'FTIC Pell Recipient 6-yr Graduation Rate',
+    'P-1F':'% UG with \u22651 High-Impact Practice by Graduation',
+    'P-1G':'Undergraduate Class Size Index',
+    'P-1H':'% Graduates Enrolled or Employed',
+    'P-2A':'R&D Expenditures',
+    'P-2B':'Patents Awarded Annually',
+    'P-2C':'Licenses and Options Executed Annually',
+    'P-2D':'Start-up Companies Created Annually',
+    'P-2E':'Faculty FTE',
+    'P-2F':'Post-doctoral Appointments',
+    'P-3A':'National Academy Members',
+    'P-3B':'Faculty, Staff and Student Satisfaction',
+    'P-3C':'Community Engagement',
+    'P-3D':'Alumni Participation Rate',
+    'P-3E':'Pegasus Partnerships',
+    'P-4A':'Annual Fundraising',
+    'P-4B':'Endowment Value',
+    'P-4D':'USNWR Peer Evaluation Rating'
+  };
+
+  // Group band headers
+  let prevG='';
+  METRICS.forEach((m,ci)=>{
+    const cx=leftPad+ci*cw;
+    if(m.grp!==prevG){
+      const grpW=METRICS.filter(mm=>mm.grp===m.grp).length*cw;
+      const r=el('rect');r.setAttribute('x',cx);r.setAttribute('y',4);r.setAttribute('width',grpW-2);r.setAttribute('height',14);r.setAttribute('fill',m.col);r.setAttribute('opacity','0.13');r.setAttribute('rx','2');svg.appendChild(r);
+      const t=el('text');t.setAttribute('x',cx+grpW/2-16);t.setAttribute('y',14);t.setAttribute('font-family',"'IBM Plex Mono',monospace");t.setAttribute('font-size','9');t.setAttribute('fill',m.col);t.setAttribute('font-weight','600');t.textContent=m.grp;svg.appendChild(t);
+      prevG=m.grp;
+    }
+    // Column label (rotated)
+    const ct=el('text');
+    ct.setAttribute('transform',`translate(${cx+cw/2},${topPad-6}) rotate(-48)`);
+    ct.setAttribute('text-anchor','end');ct.setAttribute('font-family',"'IBM Plex Mono',monospace");
+    ct.setAttribute('font-size','9');ct.setAttribute('fill','#888');
+    ct.textContent=m.id;svg.appendChild(ct);
+
+    // Invisible hit rect spanning full column header area — tooltip on hover
+    const colHit=el('rect');
+    colHit.setAttribute('x',cx);colHit.setAttribute('y',0);
+    colHit.setAttribute('width',cw);colHit.setAttribute('height',topPad-2);
+    colHit.setAttribute('fill','transparent');colHit.style.cursor='default';
+    colHit.addEventListener('mouseenter',e=>{
+      const cnt=SS.filter(s=>s.pc.includes(m.id)).length;
+      showTip(e,`${m.id}\n${MLBL[m.id]||m.lbl}\n${cnt} strateg${cnt===1?'y':'ies'} reference this metric`);
+    });
+    colHit.addEventListener('mouseleave',hideTip);
+    svg.appendChild(colHit);
+  });
+
+  // Rows
+  GLS.forEach((g,ri)=>{
+    const ry=topPad+ri*cellH;
+    const pc=PRS.find(p=>p.id===g.pid)?.col||'#666';
+    const pnum=parseInt(g.pid.substring(1));
+
+    // Row background stripe
+    const rbg=el('rect');rbg.setAttribute('x',leftPad);rbg.setAttribute('y',ry+1);rbg.setAttribute('width',nC*cw);rbg.setAttribute('height',cellH-2);rbg.setAttribute('fill',ri%2===0?'#F8F8F6':'#FFF');svg.appendChild(rbg);
+
+    // Row label text
+    const rl=el('text');rl.setAttribute('x',leftPad-4);rl.setAttribute('y',ry+cellH/2+4);
+    rl.setAttribute('text-anchor','end');rl.setAttribute('font-family',"'IBM Plex Mono',monospace");
+    rl.setAttribute('font-size','9.5');rl.setAttribute('fill',pc);rl.textContent=g.code;svg.appendChild(rl);
+
+    // Invisible hit rect over the row label area — tooltip with full goal title
+    const rowHit=el('rect');
+    rowHit.setAttribute('x',0);rowHit.setAttribute('y',ry);
+    rowHit.setAttribute('width',leftPad-2);rowHit.setAttribute('height',cellH);
+    rowHit.setAttribute('fill','transparent');rowHit.style.cursor='default';
+    const gStrats=SS.filter(s=>s.gid===g.id).length;
+    const pr=PRS.find(p=>p.id===g.pid);
+    rowHit.addEventListener('mouseenter',e=>{
+      showTip(e,`${g.code}\n${g.title.replace(/&amp;/g,'&')}\n${pr?pr.lbl:''} \u00b7 ${gStrats} strategies`);
+    });
+    rowHit.addEventListener('mouseleave',hideTip);
+    svg.appendChild(rowHit);
+
+    // Cells
+    METRICS.forEach((m,ci)=>{
+      const cx=leftPad+ci*cw;
+      const v=mat[g.id][m.id]||0;
+      const isCx=parseInt(m.grp.split('-')[1])!==pnum;
+      const opc=v===0?0:0.15+0.72*(v/maxV);
+      const cell=el('rect');cell.setAttribute('x',cx+1);cell.setAttribute('y',ry+2);cell.setAttribute('width',cw-2);cell.setAttribute('height',cellH-4);cell.setAttribute('rx','2');
+      if(v>0){cell.setAttribute('fill',isCx?'#C8A000':m.col);cell.setAttribute('opacity',opc);}else{cell.setAttribute('fill','transparent');}
+      if(v>0){
+        cell.style.cursor='pointer';
+        cell.addEventListener('mouseenter',e=>showTip(e,`${g.code} \u00d7 ${m.id}\n${g.title.replace(/&amp;/g,'&').substring(0,48)}...\n${MLBL[m.id]||m.id}: ${v} strateg${v===1?'y':'ies'}${isCx?'\n\u26a1 Cross-priority metric':''}`));
+        cell.addEventListener('mouseleave',hideTip);
+        cell.addEventListener('click',()=>fByMetric(m.id));
+      }
+      svg.appendChild(cell);
+      if(v>0){const vt=el('text');vt.setAttribute('x',cx+cw/2);vt.setAttribute('y',ry+cellH/2+3.5);vt.setAttribute('text-anchor','middle');vt.setAttribute('font-family',"'IBM Plex Mono',monospace");vt.setAttribute('font-size','9');vt.setAttribute('fill',opc>0.5?'#fff':'#444');vt.setAttribute('pointer-events','none');vt.textContent=v;svg.appendChild(vt);}
+    });
+  });
+  const leg=el('text');leg.setAttribute('x',leftPad);leg.setAttribute('y',H-7);leg.setAttribute('font-size','9');leg.setAttribute('fill','#AAA');leg.setAttribute('font-family',"'IBM Plex Mono',monospace");leg.textContent='\u25a0 Aligned  \u25a0 Cross-priority (gold)  \u00b7 Numbers = strategy count';svg.appendChild(leg);
+}
+
+// ── COVERAGE ───────────────────────────────────────────────────────────
+function buildCoverage(){
+  const counts={};METRICS.forEach(m=>{counts[m.id]=SS.filter(s=>s.pc.includes(m.id)).length;});
+  const maxC=Math.max(...Object.values(counts));
+  let html='',prevG='';
+  METRICS.forEach(m=>{
+    if(m.grp!==prevG){html+=`<div class="csl" style="color:${m.col};padding-left:0;margin-bottom:6px;margin-top:${prevG?14:0}px">${m.grp} Metrics</div>`;prevG=m.grp;}
+    const c=counts[m.id]||0;const w=c===0?0:Math.round((c/maxC)*100);
+    html+=`<div class="cbr"><span class="cbl" style="color:${m.col}">${m.id}</span><div class="cbt" onclick="fByMetric('${m.id}')" title="Filter: ${m.id}"><div class="cbf" style="width:${w}%;background:${m.col}">${c>0?`<span class="cbc">${c}</span>`:''}</div></div></div>`;
+  });
+  document.getElementById('covBars').innerHTML=html;
+  const fcounts={};FOCS.forEach(f=>{fcounts[f.id]=SS.filter(s=>s.fc.includes(f.id)).length;});
+  document.getElementById('covFocus').innerHTML=FOCS.map(f=>`
+    <div class="cfc" id="cfc-${f.id.replace('-','')}" onclick="fByFcode('${f.id}')">
+      <div class="cfn" style="color:${fcounts[f.id]>20?'#C8A000':fcounts[f.id]>10?'#1E4D8C':'#666'}">${fcounts[f.id]}</div>
+      <div class="cflb">${f.lbl}</div>
+      <div class="cfb">${f.id}</div>
+    </div>`).join('');
+}
+
+// ── NETWORK (pure SVG, quadrant layout) ─────────────────────────────────
+const CMAP={'P1':'#1E4D8C','P2':'#1A6B3C','P3':'#7A2D7E','P4':'#B85C00'};
+// Fixed positions: 4 quadrants, 3 nodes each
+const NODE_POS={
+  P1G1:{x:.18,y:.22},P1G2:{x:.26,y:.42},P1G3:{x:.18,y:.62},
+  P2G1:{x:.72,y:.22},P2G2:{x:.82,y:.42},P2G3:{x:.72,y:.62},
+  P3G1:{x:.18,y:.78},P3G2:{x:.32,y:.88},P3G3:{x:.46,y:.82},
+  P4G1:{x:.72,y:.78},P4G2:{x:.82,y:.88},P4G3:{x:.68,y:.88}
+};
+function buildNetwork(){
+  const wrap=document.getElementById('netWrap');
+  const W=Math.max(wrap.offsetWidth||700,500),H=460;
+  const svgEl=document.getElementById('netSvg');
+  svgEl.setAttribute('width',W);svgEl.setAttribute('height',H);
+  svgEl.innerHTML='';
+  const ns='http://www.w3.org/2000/svg';
+  const mk=n=>document.createElementNS(ns,n);
+  // quadrant labels
+  const qlbls=[
+    {x:.12,y:.06,lbl:'P1 Student Success',col:'#1E4D8C'},
+    {x:.62,y:.06,lbl:'P2 Discovery',col:'#1A6B3C'},
+    {x:.10,y:.70,lbl:'P3 Community',col:'#7A2D7E'},
+    {x:.62,y:.70,lbl:'P4 Innovation',col:'#B85C00'}
+  ];
+  // Divider lines
+  const hline=mk('line');hline.setAttribute('x1',W*0.5);hline.setAttribute('y1',0);hline.setAttribute('x2',W*0.5);hline.setAttribute('y2',H);hline.setAttribute('stroke','#EEE');hline.setAttribute('stroke-width','1');hline.setAttribute('stroke-dasharray','4,4');svgEl.appendChild(hline);
+  const vline=mk('line');vline.setAttribute('x1',0);vline.setAttribute('y1',H*0.5);vline.setAttribute('x2',W);vline.setAttribute('y2',H*0.5);vline.setAttribute('stroke','#EEE');vline.setAttribute('stroke-width','1');vline.setAttribute('stroke-dasharray','4,4');svgEl.appendChild(vline);
+  qlbls.forEach(q=>{
+    const t=mk('text');t.setAttribute('x',W*q.x);t.setAttribute('y',H*q.y+14);
+    t.setAttribute('font-family',"'IBM Plex Mono',monospace");t.setAttribute('font-size','10');
+    t.setAttribute('fill',q.col);t.setAttribute('font-weight','600');t.setAttribute('opacity','0.6');
+    t.textContent=q.lbl;svgEl.appendChild(t);
+  });
+  // Compute node px positions
+  const pos={};
+  GLS.forEach(g=>{
+    const np=NODE_POS[g.id]||{x:.5,y:.5};
+    pos[g.id]={x:np.x*W,y:np.y*H,n:SS.filter(s=>s.gid===g.id).length};
+  });
+  // Draw edges first
+  NET_EDGES.forEach(e=>{
+    const a=pos[e.s],b=pos[e.t];if(!a||!b) return;
+    const line=mk('line');
+    line.setAttribute('x1',a.x);line.setAttribute('y1',a.y);
+    line.setAttribute('x2',b.x);line.setAttribute('y2',b.y);
+    line.setAttribute('stroke',e.ty==='cross'?'#C8A000':'#C8C8C8');
+    line.setAttribute('stroke-width',e.ty==='cross'?1.5:1);
+    if(e.ty==='cross') line.setAttribute('stroke-dasharray','5,3');
+    line.setAttribute('opacity',e.ty==='cross'?0.65:0.35);
+    line.dataset.s=e.s;line.dataset.t=e.t;line.dataset.ty=e.ty;
+    svgEl.appendChild(line);
+  });
+  // Draw nodes
+  GLS.forEach(g=>{
+    const p=pos[g.id];const col=CMAP[g.pid];
+    const r=12+p.n*1.9;
+    const grp=mk('g');grp.setAttribute('cursor','pointer');grp.dataset.id=g.id;grp.dataset.pid=g.pid;
+    const circle=mk('circle');
+    circle.setAttribute('cx',p.x);circle.setAttribute('cy',p.y);circle.setAttribute('r',r);
+    circle.setAttribute('fill',col);circle.setAttribute('stroke',col);circle.setAttribute('stroke-width','2');circle.setAttribute('opacity','0.88');
+    const label=mk('text');
+    label.setAttribute('x',p.x);label.setAttribute('y',p.y+3.5);
+    label.setAttribute('text-anchor','middle');label.setAttribute('font-family',"'IBM Plex Mono',monospace");
+    label.setAttribute('font-size','9');label.setAttribute('fill','#fff');
+    label.setAttribute('font-weight','600');label.setAttribute('pointer-events','none');
+    label.textContent=g.code.replace('P','').replace('G','.');
+    grp.appendChild(circle);grp.appendChild(label);
+    grp.addEventListener('mouseenter',e=>{
+      const bd=BDGS[g.id]||[];
+      const bTxt=bd.length?'\n\u21c4 '+bd.map(b=>b.g).join(', '):'';
+      showTip(e,`${g.code}\n${g.title.substring(0,55)}\n${p.n} strategies${bTxt}`);
+    });
+    grp.addEventListener('mouseleave',hideTip);
+    grp.addEventListener('click',ev=>{
+      ev.stopPropagation();
+      if(activeNet===g.id){activeNet=null;resetF();hlNet(null);}
+      else{activeNet=g.id;hlNet(g.id);F.priority=g.pid;document.querySelectorAll('[data-f="priority"]').forEach(c=>c.classList.toggle('on',c.dataset.v===g.pid));applyF();gt(g.id.toLowerCase());}
+    });
+    svgEl.appendChild(grp);
+  });
+  svgEl.addEventListener('click',()=>{if(activeNet){activeNet=null;resetF();hlNet(null);}});
+}
+function hlNet(id){
+  const svgEl=document.getElementById('netSvg');
+  if(!id){
+    svgEl.querySelectorAll('g[data-id]').forEach(n=>n.setAttribute('opacity','1'));
+    svgEl.querySelectorAll('line[data-s]').forEach(l=>l.setAttribute('opacity',l.dataset.ty==='cross'?'0.65':'0.35'));
+    return;
+  }
+  const conn=new Set([id]);
+  NET_EDGES.forEach(e=>{if(e.s===id)conn.add(e.t);if(e.t===id)conn.add(e.s);});
+  svgEl.querySelectorAll('g[data-id]').forEach(n=>n.setAttribute('opacity',conn.has(n.dataset.id)?'1':'0.15'));
+  svgEl.querySelectorAll('line[data-s]').forEach(l=>{
+    const linked=(l.dataset.s===id||l.dataset.t===id);
+    l.setAttribute('opacity',linked?'0.9':'0.04');
+    if(linked) l.setAttribute('stroke-width',l.dataset.ty==='cross'?'2':'1.5');
+  });
+}
+
+// ── VIZ TABS ───────────────────────────────────────────────────────────
+function svt(idx){
+  document.querySelectorAll('.vt').forEach((t,i)=>t.classList.toggle('on',i===idx));
+  document.querySelectorAll('.vp').forEach((p,i)=>p.classList.toggle('on',i===idx));
+  if(idx===2) buildNetwork();
+}
+
+// ── NAVIGATION ─────────────────────────────────────────────────────────
+function gt(id){
+  const el=document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth'});
+  if(window.innerWidth<900) document.getElementById('sb').classList.remove('op');
+}
+function tgSB(){document.getElementById('sb').classList.toggle('op');}
+function svt_and_go(idx){svt(idx);gt('vizsec');}
+
+// ── TOOLTIP ─────────────────────────────────────────────────────────────
+function showTip(e,txt){
+  const t=document.getElementById('tip');
+  t.innerHTML=txt.replace(/\n/g,'<br>');t.style.display='block';
+  t.style.left=(e.clientX+12)+'px';t.style.top=(e.clientY-10)+'px';
+}
+function hideTip(){document.getElementById('tip').style.display='none';}
+
+// ── SCROLL / NAV HIGHLIGHT ──────────────────────────────────────────────
+const ANCHORS=['overview','mission','ucfalign','walkthrough','vizsec',
+  'p1','p1g1','p1g2','p1g3','p2','p2g1','p2g2','p2g3',
+  'p3','p3g1','p3g2','p3g3','p4','p4g1','p4g2','p4g3','resources'];
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      document.querySelectorAll('.ni,.ns').forEach(n=>{
+        const fn=n.getAttribute('onclick')||'';
+        n.classList.toggle('on',fn.includes(`'${id}'`));
+      });
+    }
+  });
+},{rootMargin:'-22% 0px -68% 0px'});
+
+// ── INIT ───────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded',()=>{
+  buildStepper();
+  buildStrategies();
+  buildMatrix();
+  buildCoverage();
+  ANCHORS.forEach(id=>{const el=document.getElementById(id);if(el)io.observe(el);});
+  window.addEventListener('scroll',updateStepper,{passive:true});
+  updateStepper();
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ECE Strategic Plan 2027–2032</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--gold:#FFC904;--gray-900:#212529;--gray-800:#343a40;--gray-600:#6c757d;--gray-400:#adb5bd;--gray-200:#dee2e6;--gray-50:#f8f9fa;--white:#fff}
+html{font-size:16px;-webkit-font-smoothing:antialiased}
+body{
+  font-family:'DM Sans',system-ui,sans-serif;
+  background:var(--gray-900);color:var(--white);
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:2rem;
+}
+.container{max-width:640px;width:100%;text-align:center}
+.ucf-badge{
+  display:inline-block;font-family:'JetBrains Mono',monospace;
+  font-size:.66rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;
+  padding:.28rem .85rem;border:1px solid var(--gold);border-radius:3px;color:var(--gold);
+  margin-bottom:1.5rem;
+}
+h1{font-family:'DM Serif Display',Georgia,serif;font-size:clamp(2rem,5vw,3rem);line-height:1.15;margin-bottom:.5rem}
+.gold-rule{width:80px;height:4px;background:var(--gold);border-radius:2px;margin:1.25rem auto}
+.subtitle{color:var(--gray-400);font-size:1rem;line-height:1.6;margin-bottom:2rem}
+.version{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--gray-600);margin-bottom:2.5rem}
+
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2.5rem}
+@media(max-width:500px){.cards{grid-template-columns:1fr}}
+.card{
+  background:var(--gray-800);border:1px solid var(--gray-600);
+  border-radius:12px;padding:1.75rem 1.5rem;
+  text-decoration:none;color:var(--white);
+  transition:all .25s ease;display:flex;flex-direction:column;align-items:center;gap:.6rem;
+}
+.card:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 8px 30px rgba(255,201,4,.12)}
+.card-icon{font-size:2rem}
+.card-title{font-weight:600;font-size:1.05rem}
+.card-desc{font-size:.82rem;color:var(--gray-400);line-height:1.5}
+
+.survey-link{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-family:'JetBrains Mono',monospace;font-size:.75rem;
+  color:var(--gold);text-decoration:none;
+  padding:.4rem 1rem;border:1px solid var(--gold);border-radius:5px;
+  transition:all .2s;margin-bottom:2rem;
+}
+.survey-link:hover{background:rgba(255,201,4,.1)}
+
+.committee{
+  font-family:'JetBrains Mono',monospace;font-size:.65rem;
+  color:var(--gray-600);line-height:1.8;
+}
+.committee .chair{color:var(--gold)}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.container>*{animation:fadeIn .5s ease both}
+.container>*:nth-child(1){animation-delay:.05s}
+.container>*:nth-child(2){animation-delay:.1s}
+.container>*:nth-child(3){animation-delay:.15s}
+.container>*:nth-child(4){animation-delay:.2s}
+.container>*:nth-child(5){animation-delay:.25s}
+.container>*:nth-child(6){animation-delay:.3s}
+.container>*:nth-child(7){animation-delay:.35s}
+.container>*:nth-child(8){animation-delay:.4s}
+.container>*:nth-child(9){animation-delay:.5s}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="ucf-badge">UCF · College of Engineering &amp; Computer Science</div>
+  <h1>ECE Strategic Plan<br>2027 – 2032</h1>
+  <div class="gold-rule"></div>
+  <div class="subtitle">Department of Electrical and Computer Engineering</div>
+  <div class="version">DRAFT v0.9 · March 2026</div>
+
+  <div class="cards">
+    <a href="slides.html" class="card">
+      <div class="card-icon">📊</div>
+      <div class="card-title">Slide Overview</div>
+      <div class="card-desc">Self-guided 15-slide walkthrough of the full strategic plan</div>
+    </a>
+    <a href="plan.html" class="card">
+      <div class="card-icon">📄</div>
+      <div class="card-title">Full Plan</div>
+      <div class="card-desc">Complete interactive website with all strategies, timelines, and metrics</div>
+    </a>
+  </div>
+
+  <a href="https://ucf.qualtrics.com/jfe/form/SV_6eTZQHve6BlxPzE?section=overall" class="survey-link" target="_blank" rel="noopener">💬 Provide Feedback (Anonymous Survey)</a>
+
+  <div class="committee">
+    <span class="chair">A. Vosoughi (Chair)</span> · <span class="chair">M. Borowczak (Co-Chair)</span><br>
+    A. Behal · I. Batarseh · C.Y. Chan · R. DeMara · Y. Fallah · H. Kamali · T. Nghiem · M. Rakhshan · J. Wang<br>
+    Department Chair: Dr. Reza Abdolvand
+  </div>
+</div>
+</body>
+</html>
